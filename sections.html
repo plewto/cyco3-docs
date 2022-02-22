@@ -134,10 +134,10 @@
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="clone"></a>
   
-  <!-- (CLONE section &key new-name new-parent) -->
+  <!-- (CLONE section &key new-name new-parent exclude rename-parts bind) -->
   <!--  -->
   <!--  -->
-  <b class="definition">(CLONE section &key new-name new-parent)</b><br>
+  <b class="definition">(CLONE section &key new-name new-parent exclude rename-parts bind)</b><br>
   <p class="summery">Creates deep-copy of section.</p>
   <pre class="description">
     Clone is a generic function defined for many different types.
@@ -147,6 +147,18 @@
                   source section's name.
     :new-parent - Sets the parent of the clone.  By default the clone has
                   the same parent as the original.
+    
+    :exclude    - List of part names to be excluded from the copy.  
+                  A warning is issued if the list contains a non-existent name.
+    
+    :rename-parts, bool - If non-nil all copied parts are renamed.  It is assumed 
+                 part names have the form s.name or s-name  where s is the section name
+                 and name is the part name.  :rename-parts replaces the original 
+                 section prefix with the cloned section name.
+                 See BULK-RENAME-PARTS if you need more control.
+    
+    :bind, bool - If non-nil all resulting child parts will be bound to symbols 
+                  matching their name.
   </pre>
   <p class="body">
     <B>WARNING: A cloned section <em>does not</em> contain copies
@@ -225,7 +237,7 @@
     
     section     - The section.
     prefix-trim - Integer, number of characters to remove from left of each name.
-    new-prexif  - String, text to add to each name.
+    new-prefix  - String, text to add to each name.
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="midi"></a>
