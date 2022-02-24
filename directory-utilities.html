@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="robots" content="index,follow,archive">
+      <meta name="keywords" content="NIL">
+      <link rel="stylesheet" type="text/css" href="style.css"/>
+      <title>Directory Utilities</title>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'/>
+  </head>
+  
+<body lang="en-US">
+  <a id="top"></a>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=specialized-parts.html class="navigation">Previous: specialized-parts </a> &nbsp;<a href=plugins.html class="navigation">Next: plugins </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <h1 class="banner">Directory Utilities</h1>
+  
+  <!-- (CWD &optional dir) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(CWD &optional dir)</b><br>
+  <p class="summery">Returns, and optionally changes, Current Working Directory.</p>
+  <pre class="description">
+    If a string is passed to the dir argument the current directory is changed.
+    It is an error if the directory does not exists.
+    
+    Call <b>(?SPECIAL-DIRECTORIES)</b> for a list of special case prefixes recognized by 
+    the dir argument.  Predefined prefixes include
+    
+        ~         - Users home
+        .         - Current directory
+        ..        - Parent of current directory
+        -         - Previous directory
+        @projects - cyco-projects folder
+        @project  - Current project folder
+        @out      - Current project output directory
+        @plugin-0 - User plugins 
+        @plugin-1 - Built in plugins
+        @cyco     - The cyco installation folder
+        @config   - The cyco configuration folder
+    
+    NOTE: CWD has only been tested on Linux.
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (PUSH-SPECIAL-DIRECTORY prefix remarks function) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(PUSH-SPECIAL-DIRECTORY prefix remarks function)</b><br>
+  <p class="summery">Adds new special directory prefix.   If an assignment to prefix already exists, 
+  the new prefix shadows the previous one.</p>
+  <pre class="description">
+    prefix - directory prefix string, With exception of a few cases prefixes start 
+             with the '@' character by convention.
+    
+    remarks - Mnemonic text describing this prefix.
+    
+    function - A zero-argument function which returns the expanded value of prefix.
+               (lambda () ) -&gt; string
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (POP-SPECIAL-DIRECTORY (prefix &key from-end) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(POP-SPECIAL-DIRECTORY (prefix &key from-end)</b><br>
+  <p class="summery">Removes the indicated prefix.   If a previous prefix has the same value as prefix
+  it becomes active.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (?SPECIAL-DIRECTORIES) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(?SPECIAL-DIRECTORIES)</b><br>
+  <p class="summery">Prints list of directory prefixes.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (DIRECTORY-CONTENTS &key dir exclude match invert) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(DIRECTORY-CONTENTS &key dir exclude match invert)</b><br>
+  <p class="summery">Returns list of directory contents.</p>
+  <pre class="description">
+    :dir  - directory. May either be relative to the CWD, an absolute location 
+              or begin with a special-directory prefix.  Defaults to the CWD.
+    
+    :exclude - List of file attributes to be excluded.  Possible values are
+               :H - hidden files  (the default)
+               :L - links (currently not implemented)
+               :D - directories
+               :F - regular files.
+    
+    :match - string, only filenames which contain the match string as a sub-string 
+             are included.
+    
+    :invert - bool, invert the sense of match.
+    
+    Returns nested list of form 
+    
+            (((attributes-1) filename-1)
+             ((attributes-2) filename-2)
+               .......................
+             ((attributes-n) filename-n))
+    
+    Where attributes list contains one or more keywords :H, :L, :D or :F.
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (LS &key dir exclude match invert) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(LS &key dir exclude match invert)</b><br>
+  <p class="summery">Prints directory contents.   Arguments have exact same usage as 
+  <b>DIRECTORY-CONTENTS</B></p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=specialized-parts.html class="navigation">Previous: specialized-parts </a> &nbsp;<a href=plugins.html class="navigation">Next: plugins </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  
+</body>
+</html>
