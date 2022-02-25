@@ -6,7 +6,7 @@
       <meta name="robots" content="index,follow,archive">
       <meta name="keywords" content="NIL">
       <link rel="stylesheet" type="text/css" href="style.css"/>
-      <title>Directory Utilities</title>
+      <title>Shell Utilities</title>
       <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
       <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'/>
       <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'/>
@@ -16,7 +16,10 @@
   <a id="top"></a>
   <a href=index.html class="link">Home</a> &nbsp;<a href=specialized-parts.html class="navigation">Previous: specialized-parts </a> &nbsp;<a href=plugins.html class="navigation">Next: plugins </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
-  <h1 class="banner">Directory Utilities</h1>
+  <h1 class="banner">Shell Utilities</h1>
+  <p class="footnote">
+    The shell utilitiy functions have only been tested on Linux.
+  </p>
   
   <!-- (CWD &optional dir) -->
   <!--  -->
@@ -41,8 +44,6 @@
         @plugin-1 - Built in plugins
         @cyco     - The cyco installation folder
         @config   - The cyco configuration folder
-    
-    NOTE: CWD has only been tested on Linux.
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   
@@ -78,43 +79,71 @@
   <p class="summery">Prints list of directory prefixes.</p>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   
-  <!-- (DIRECTORY-CONTENTS &key dir exclude match invert) -->
+  <!-- (RESOLVE-SPECIAL-DIRECTORY namstring) -->
   <!--  -->
   <!--  -->
-  <b class="definition">(DIRECTORY-CONTENTS &key dir exclude match invert)</b><br>
-  <p class="summery">Returns list of directory contents.</p>
+  <b class="definition">(RESOLVE-SPECIAL-DIRECTORY namstring)</b><br>
+  <p class="summery">Replaces start of file namestring if it matches a special directory.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (LS &optional dir options) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(LS &optional dir options)</b><br>
+  <p class="summery">Calls system ls command.</p>
   <pre class="description">
-    :dir  - directory. May either be relative to the CWD, an absolute location 
-              or begin with a special-directory prefix.  Defaults to the CWD.
-    
-    :exclude - List of file attributes to be excluded.  Possible values are
-               :H - hidden files  (the default)
-               :L - links (currently not implemented)
-               :D - directories
-               :F - regular files.
-    
-    :match - string, only filenames which contain the match string as a sub-string 
-             are included.
-    
-    :invert - bool, invert the sense of match.
-    
-    Returns nested list of form 
-    
-            (((attributes-1) filename-1)
-             ((attributes-2) filename-2)
-               .......................
-             ((attributes-n) filename-n))
-    
-    Where attributes list contains one or more keywords :H, :L, :D or :F.
+    dir    - Directory, defaults to (CWD)
+    options - Command line options, default 
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   
-  <!-- (LS &key dir exclude match invert) -->
+  <!-- (DIRECTORY-CONTENTS &key dir exclude ignore form) -->
   <!--  -->
   <!--  -->
-  <b class="definition">(LS &key dir exclude match invert)</b><br>
-  <p class="summery">Prints directory contents.   Arguments have exact same usage as 
-  <b>DIRECTORY-CONTENTS</B></p>
+  <b class="definition">(DIRECTORY-CONTENTS &key dir exclude ignore form)</b><br>
+  <p class="summery">Returns list of directory contents.</p>
+  <pre class="description">
+    :dir     - The directory, default (CWD)
+    :exclude - List of file properties to be excluded.  Options are
+               :h hidden, :l links, :d directories and :f regular files.
+               May be a single keyword or list, defaults to :h
+    :ignore  - Shell pattern for filenames to be ignored.
+    :form    - Output format may either be :short or :long (default)
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (GREP pattern &key dir options ignore invert print) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(GREP pattern &key dir options ignore invert print)</b><br>
+  <p class="summery">Calls system grep command and returns list of files containing pattern.</p>
+  <pre class="description">
+    pattern  - Regular expression passed to grep.
+    :dir     - Working directory, defaults to (CWD)
+    :options - Command line options passed to grep, defaults to &quot;-i&quot;
+    :ignore  - String, ignore all files which include value as a substring.
+    :invert  - Bool, invert logic sense of ignore.
+    :print   - Bool, if true print formatted text to terminal instead of returning
+               a list.
+    
+    Returns list or nil (if print is true)
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (GREP-COUNT pattern &key dir options ignore invert print) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(GREP-COUNT pattern &key dir options ignore invert print)</b><br>
+  <p class="summery">Returns number of times pattern appears in each searched file.<br>
+   Arguments are identical to <b>GREP</b>.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (GREP2 pattern1 pattern2 &key dir options ignore invert print) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(GREP2 pattern1 pattern2 &key dir options ignore invert print)</b><br>
+  <p class="summery">Runs grep in sequence on two patterns, returns only those file which contain both patterns.<br>
+  With exception of the second pattern argument, usage is identical to <b>GREP</b></p>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a href=index.html class="link">Home</a> &nbsp;<a href=specialized-parts.html class="navigation">Previous: specialized-parts </a> &nbsp;<a href=plugins.html class="navigation">Next: plugins </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
   
