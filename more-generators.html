@@ -22,10 +22,10 @@
   <H4 class="heading">Hailstone</H4>
   <img class="center" src="images/hailstone.png" alt="hailstone"/>
   
-  <!-- (HAILSTONE seed &key even odd hook monitor action) -->
+  <!-- (HAILSTONE seed &key even odd hook) -->
   <!--  -->
   <!--  -->
-  <b class="definition">(HAILSTONE seed &key even odd hook monitor action)</b><br>
+  <b class="definition">(HAILSTONE seed &key even odd hook)</b><br>
   <p class="summery">Returns generator which produces a <a href='https://en.wikipedia.org/wiki/Collatz_conjecture'>
   hailstone</a> sequence  <a href='https://oeis.org/A061641'>A061641</a></p>
   <pre class="description">
@@ -34,12 +34,6 @@
     :even - Function applied to even result, default (lambda (n)(/ 2 n))
     :odd  - Function applied to odd result, default (lambda (n)(1+ (* 3 n)))
     :hook - Function applied to output value, default (lambda (n) n)
-    :monitor - Predicate function called within NEXT-1.  When monitor returns
-               non-nil the action function is executed.
-               Default (lambda (value) nil)
-    :action  - Function called within NEXT-1 whenever monitor is non-nil.
-               The result becomes the next internal value.
-               Default (lambda (hailstone value) value)
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="recaman"></a>
@@ -49,22 +43,16 @@
     <a href='https://en.wikipedia.org/wiki/File:Reacam%C3%A1nSequenceDrawing.png'>image credit</a>
   </p>
   
-  <!-- (RECAMAN seed &key hook monitor action) -->
+  <!-- (RECAMAN seed &key hook) -->
   <!--  -->
   <!--  -->
-  <b class="definition">(RECAMAN seed &key hook monitor action)</b><br>
+  <b class="definition">(RECAMAN seed &key hook)</b><br>
   <p class="summery">Returns generator which produces <a href='https://en.wikipedia.org/wiki/Recam%C3%A1n%27s_sequence'>
   Recamán's</a> sequence <a href='https://oeis.org/A005132'>A005132</a>.</p>
   <pre class="description">
     
     seed  - Integer, starting value.
     :hook - Function, default #'(lambda (n) n)
-    :monitor - Predicate function called within NEXT-1.  When monitor returns
-               non-nil the action function is executed.
-               Default (lambda (value) nil)
-    :action  - Function called within NEXT-1 whenever monitor is non-nil.
-               The result becomes the next internal value.
-               Default (lambda (recaman value) value)
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="bones"></a>
@@ -74,21 +62,15 @@
     <a href='https://commons.wikimedia.org/wiki/File:X-ray_of_normal_hand_by_dorsoplantar_projection.jpg'>image credit</a>
   </p>
   
-  <!-- (BONES &key function hook monitor action) -->
+  <!-- (BONES &key function hook) -->
   <!--  -->
   <!--  -->
-  <b class="definition">(BONES &key function hook monitor action)</b><br>
+  <b class="definition">(BONES &key function hook)</b><br>
   <p class="summery">Random number generator</p>
   <pre class="description">
     :function - Random number generator, defaults to (lambda ()(random 1.0))
                 The <a href='pdf.html'>PDF</a> plugin defines several suitable functions.
     :hook     - Value hook, defaults to (lambda (n) n)
-    :monitor - Predicate function called within NEXT-1.  When monitor returns
-               non-nil the action function is executed.
-               Default (lambda (value) nil)
-    :action  - Function called within NEXT-1 whenever monitor is non-nil.
-               The return value is not used.
-               Default (lambda ())
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="logistic"></a>
@@ -98,10 +80,10 @@
     <a href='https://commons.wikimedia.org/wiki/File:Logistic_Bifurcation_map_High_Resolution.png'>Image credit</a>
   </p>
   
-  <!-- (LOGISTIC &key prerun seed mu hook monitor action) -->
+  <!-- (LOGISTIC &key prerun seed mu hook) -->
   <!--  -->
   <!--  -->
-  <b class="definition">(LOGISTIC &key prerun seed mu hook monitor action)</b><br>
+  <b class="definition">(LOGISTIC &key prerun seed mu hook)</b><br>
   <p class="summery">Returns generator which uses a <a href='https://en.wikipedia.org/wiki/Logistic_map'>Logistic map</a>.</p>
   <pre class="description">
     
@@ -109,22 +91,16 @@
     :seed   - Float, initial value, 0.0 &lt; seed &le; 1.0, default 0.5
     :mu     - Float, 'fecundity' parameter, 0.0 &le; mu &le; 4.0, default 3.25
     :hook   - Value hook function, default (lambda (n) n)
-    :monitor - Predicate function called within NEXT-1.  When monitor returns
-               non-nil the action function is executed.
-               Default (lambda (value) nil)
-    :action  - Function called within NEXT-1 whenever monitor is non-nil.
-               The return value becomes the next logistic value.
-               Default (lambda (logistic value) value)
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="euclid"></a>
   <H4 class="heading">Euclid</H4>
   <img class="center" src="images/euclid.png" alt="euclid"/>
   
-  <!-- (EUCLID length points &key shift hook monitor action) -->
+  <!-- (EUCLID length points &key shift hook) -->
   <!--  -->
   <!--  -->
-  <b class="definition">(EUCLID length points &key shift hook monitor action)</b><br>
+  <b class="definition">(EUCLID length points &key shift hook)</b><br>
   <p class="summery">Returns <a href='https://en.wikipedia.org/wiki/Euclidean_rhythm'>Euclidean rhythm</a> generator.    
     See <a href='https://dbkaplun.github.io/euclidean-rhythm/'>on-line demo</a></p>
   <pre class="description">

@@ -39,10 +39,10 @@
     reign in excessive values.
   </p>
   
-  <!-- (SHIFT-REGISTER seed taps &key mask prerun hook monitor action) -->
+  <!-- (SHIFT-REGISTER seed taps &key mask prerun hook) -->
   <!--  -->
   <!--  -->
-  <b class="definition">(SHIFT-REGISTER seed taps &key mask prerun hook monitor action)</b><br>
+  <b class="definition">(SHIFT-REGISTER seed taps &key mask prerun hook)</b><br>
   <p class="summery">Returns shift-register generator.</p>
   <pre class="description">
     
@@ -68,14 +68,6 @@
               what is typically useful.  The value hook function may be used to 
               limit the registers output to a useful range.  Defaults to an 
               identity (lambda (n) n).
-    
-    :monitor - Predicate function called within NEXT-1.  When monitor result is
-               non-nil, the action function is executed.
-               Default (lambda (value) nil)
-    
-    :action - Function called within NEXT-1 whenever monitor is non-nil
-              Default (lambda (shift-register value) value)
-              The result becomes the register's next value.
   </pre>
   <H3 class="heading">Examples</H3>
   <pre class="code">

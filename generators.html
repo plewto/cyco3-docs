@@ -28,8 +28,6 @@
       <li><a href='#value-hook'>value-hook</a></li>
       <li><a href='#value'>value</a></li>
       <li><a href='#internal-value'>internal-value</a></li>
-      <li><a href='#monitor'>monitor</a></li>
-      <li><a href='#action'>action</a></li>
       <li><a href='#constant-value'>constant-value</a></li>
   </ul>
   <p class="body">
@@ -43,12 +41,6 @@
     Additionally generators have a value-hook function which is
     applied to the 'natural' value before being returned by the VALUE
     method.
-  </p>
-  <p class="body">
-    Each generator instances has a pair of functions called <em>MONITOR</em> and <em>ACTION</em>.
-    The monitor is a predicate called by NEXT-1.  If the monitor returns true for the current value, then the
-    action function is executed.  The lambda form for the action function is specific to each generator type,
-    in some cases it may modify the internal state of the generator.
   </p>
   <a id="functions"></a>
   <H3 class="heading">Functions on Generators</H3>
@@ -121,22 +113,6 @@
   <!--  -->
   <b class="definition">(VALUE generator)</b><br>
   <p class="summery">Returns the result of applying the hook function to the internal-value.</p>
-  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
-  <a id="monitor"></a>
-  
-  <!-- (MONITOR generator) -->
-  <!--  -->
-  <!--  -->
-  <b class="definition">(MONITOR generator)</b><br>
-  <p class="summery">Returns the monitor function.</p>
-  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
-  <a id="action"></a>
-  
-  <!-- (ACTION generator) -->
-  <!--  -->
-  <!--  -->
-  <b class="definition">(ACTION generator)</b><br>
-  <p class="summery">Returns the action function.</p>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="constant-value"></a>
   

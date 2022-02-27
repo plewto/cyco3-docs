@@ -22,10 +22,10 @@
     generators using a binary-function.  The default function is addition.
   </p>
   
-  <!-- (ALLOY a b &key function hook monitor action) -->
+  <!-- (ALLOY a b &key function hook) -->
   <!--  -->
   <!--  -->
-  <b class="definition">(ALLOY a b &key function hook monitor action)</b><br>
+  <b class="definition">(ALLOY a b &key function hook)</b><br>
   <p class="summery">Returns new ALLOY object.</p>
   <pre class="description">
     
@@ -36,13 +36,6 @@
                 Calling (internal-value alloy) returns (function a b)
                 Calling (value alloy) returns the composition (hook (function a b))
                 Default (lambda (n) n)
-    :monitor  - Predicate function called within NEXT-1. The action function 
-                is executed whenever monitor is non-nil.
-                Default (lambda (value) nil)
-    :action   - Function called within NEXT-1 whenever monitor is non-nil.
-                Default (lambda (alloy value) value)
-                The result becomes the next internal-value of the alloy.
-    
     Examples:
     	     
     (param a (counter 0 100 :by 10))
