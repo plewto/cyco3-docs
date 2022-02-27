@@ -18,7 +18,7 @@
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <h1 class="banner">Shell Utilities</h1>
   <p class="footnote">
-    The shell utilitiy functions have only been tested on Linux.
+    The shell utility functions have only been tested on Linux.
   </p>
   
   <!-- (CWD &optional dir) -->
@@ -118,13 +118,13 @@
   <b class="definition">(GREP pattern &key dir options ignore invert print)</b><br>
   <p class="summery">Calls system grep command and returns list of files containing pattern.</p>
   <pre class="description">
-    pattern  - Regular expression passed to grep.
+    pattern  - Regular expression.
     :dir     - Working directory, defaults to (CWD)
-    :options - Command line options passed to grep, defaults to &quot;-i&quot;
+    :options - Command line options passed to grep, defaults to &quot;-ir&quot;
     :ignore  - String, ignore all files which include value as a substring.
     :invert  - Bool, invert logic sense of ignore.
     :print   - Bool, if true print formatted text to terminal instead of returning
-               a list.
+               a list. Default t.
     
     Returns list or nil (if print is true)
   </pre>
@@ -144,6 +144,26 @@
   <b class="definition">(GREP2 pattern1 pattern2 &key dir options ignore invert print)</b><br>
   <p class="summery">Runs grep in sequence on two patterns, returns only those file which contain both patterns.<br>
   With exception of the second pattern argument, usage is identical to <b>GREP</b></p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (HEAD filename &key count banner) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(HEAD filename &key count banner)</b><br>
+  <p class="summery">Prints initial lines from file.</p>
+  <pre class="description">
+    filename   - May either be file namestring or special case symbol.
+                 If filename is the symbol 'MAIN then all files in the CWD with 'main' as a substring
+                 are processed.  Any other symbol is taken as a Lisp file in the CWD.  The symbols 
+                 name is converted to lower case and appended with the extension '.lisp'.
+    :count     - Number of lines to display.  If count is set to the keyword :comments, then the 
+                 initial block of comments lines are displayed.  Default :comments
+    :banner    - Bool, if true display banner text for each file.
+    
+    
+    (HEAD 'main) will display the initial comment block of the current project's main file.  This
+    should also work if the CWD is a plugin directory.
+  </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a href=index.html class="link">Home</a> &nbsp;<a href=specialized-parts.html class="navigation">Previous: specialized-parts </a> &nbsp;<a href=plugins.html class="navigation">Next: plugins </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
   
