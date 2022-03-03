@@ -94,6 +94,11 @@
     	subbeats should be called (perhaps 1/20th notes?)  In any case a T
     	modifier when there are 5-subbeats to the beat would result in
     	1/30th of a beat. 
+    
+            The ticks argument may be either an integer or float.
+            For int -/+ n, n tick durations are added (subtracted) from result.
+            For float -/+ f, where 0 &le; |f| &le; 1, a fraction f of a subbeat
+            is added (subtracted) from the result.
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="tbar"></a>
