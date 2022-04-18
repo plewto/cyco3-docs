@@ -23,6 +23,7 @@
       <li><a href='#basic-keynumber-map'>basic-keynumber-map</a></li>
       <li><a href='#circular-keynumber-map'>circular-keynumber-map</a></li>
       <li><a href='#symbolic-keynumber-map'>symbolic-keynumber-map</a></li>
+      <li><a href='#round-robin-keymap'>round-robin-keymap</a></li>
       <li><a href='#metronome'>metronome-keynumber-map</a></li>
   </ul>
   <p class="body">
@@ -111,6 +112,34 @@
          (foo 1) &rarr; 38
          (foo 3) &rarr; 37
          (foo 4) &rarr; 36
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a id="round-robin-keymap"></a>
+  
+  <!-- (ROUND-ROBIN-KEYMAP assignments) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(ROUND-ROBIN-KEYMAP assignments)</b><br>
+  <p class="summery">Creates a keynumber-map similar to a SYMBOLIC-KEYNUMBER-MAP but allows round-robin notes.</p>
+  <pre class="description">
+    Assignments is an association list of form
+    
+       ((symbol-1 (keynumbers ...) [optional remarks])
+        (symbol-2 (keynumbers ...) [optional remarks])
+         .......................................
+        (symbol-n (keynumbers ...) [optional remarks]))
+    
+    If the keynumbers sub-list contains more then one value, then they are sued
+    in sequence.  A typical snare keymap might look like this:
+    
+        ((hit  . (30 31 32))
+         (rim  . (40))
+         (flam . (41 42)))
+    
+    Each time the key 'hit' is played one of the key numbers 30, 31 or 32 is
+    used in sequence.   The 'rim' sound only uses key 40.
+    
+    There is currently no provision for resetting a round-robin note.
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="metronome"></a>
