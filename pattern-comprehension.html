@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="robots" content="index,follow,archive">
+      <meta name="keywords" content="NIL">
+      <link rel="stylesheet" type="text/css" href="style.css"/>
+      <title>Pattern Comprehension</title>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'/>
+  </head>
+  
+<body lang="en-US">
+  <a id="top"></a>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=more-generators.html class="navigation">Previous: more-generators </a> &nbsp;<a href=nodes.html class="navigation">Next: nodes </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <h1 class="banner">Pattern Comprehension</h1>
+  <p class="body">
+    <b>Pattern Comprehension</b> is a means to express nested
+    pattern structures in a more concise way at the cost of flexibility.
+  </p>
+  <p class="body">
+    The traditional way to construct deeply nested patterns uses
+    nested list
+  </p>
+  <pre class="code">
+    (param p1 (cycle :of (list 'A 'B 'C (dice :of (list 'APE (line :of '(BAT CAT)))))))
+  </pre>
+  <p class="body">
+    Using pattern-comprehension an identical structure is
+    constructed with a single quoted expression.
+  </p>
+  <pre class="code">
+    (param p2 (pattern-comprehension '(cycle (A B C (dice (APE (line (BAT CAT))))))))
+  </pre>
+  <p class="body">
+    Two things to note
+    <ol>
+    <li>There is a single quote.</li>
+    <li>The :OF keyword is not used.</li>
+    </ol>
+  </p>
+  <p class="body">
+    Actually the :OF keyboard may be used if it helps readability,
+    but it is completely optional and has no effect.
+  </p>
+  <pre class="code">
+    '(cycle :of (A B C (dice :of (APE (line :of (bat cat))))))
+  </pre>
+  <p class="body">
+    The following <a href='generators.html'>generator</a> and
+    <a href='patterns.html'>pattern</a> types are supported.
+    <ul>
+        <li>BAG</li>
+        <li>CYCLE</li>
+        <li>DICE</li>
+        <li>LINE</li>
+        <li>WALKER</li>
+        <li>BONES</li>
+        <li>COUNTER</li>
+        <li>HAILSTONE</li>
+        <li>LOGISTIC</li>
+        <li>RECAMAN</li>
+        <li>RAMP</li>
+        <li>SHIFT-REGISTER</li>
+    </ul>
+  </p>
+  <p class="body">
+    Several of these pattern/generator types take optional keyword
+    arguments.  The following keywords may be used where they would normally be
+    expected.
+    <ul>
+       <li>:BY</li> 
+       <li>:EVEN</li> 
+       <li>:FINAL</li> 
+       <li>:FUNCTION</li> 
+       <li>:HOOK</li>
+       <li>:LENGTH</li> 
+       <li>:MASK</li> 
+       <li>:ODD</li> 
+       <li>:OF</li> 
+       <li>:PRERUN</li> 
+    </ul>
+  </p>
+  <p class="body">
+    This list of supported pattern types and keywords are reserved
+    words and should be used with caution.
+  </p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=more-generators.html class="navigation">Previous: more-generators </a> &nbsp;<a href=nodes.html class="navigation">Next: nodes </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  
+</body>
+</html>
