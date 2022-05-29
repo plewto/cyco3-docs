@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="robots" content="index,follow,archive">
+      <meta name="keywords" content="NIL">
+      <link rel="stylesheet" type="text/css" href="style.css"/>
+      <title>Math Utilities</title>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'/>
+  </head>
+  
+<body lang="en-US">
+  <a id="top"></a>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=generic-functions.html class="navigation">Previous: generic-functions </a> &nbsp;<a href=string-utilities.html class="navigation">Next: string-utilities </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <h1 class="banner">Math Utilities</h1>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (2+ n) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(2+ n)</b><br>
+  
+  <!-- (3+ n) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(3+ n)</b><br>
+  
+  <!-- (4+ n) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(4+ n)</b><br>
+  <p class="summery">Adds 2, 3 or 4 respectively to argument.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (LIMIT n mn mx) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(LIMIT n mn mx)</b><br>
+  <p class="summery">Limits value to numeric range.</p>
+  <pre class="description">
+    Returns value n such that:   mn &le; n &le; mx
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (APPROXIMATE value &key (scale 0.1) (min -1e9) (max 1e9) (epsilon nil)) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(APPROXIMATE value &key (scale 0.1) (min -1e9) (max 1e9) (epsilon nil))</b><br>
+  <p class="summery">Returns a number approximately equal to value.</p>
+  <pre class="description">
+    
+        value - the original value.
+        :scale - maximum deviation from value.
+        :min - minimum result.
+        :max - maximum result.
+        :epsilon - see below.
+    
+    Using the default scale of 0.1, the result will be within 10 percent of value.
+    
+       0.9 * value &le; result &le; 1.1 * value
+    
+    When the original value is 0 the result is &plusmn;epsilon.  By default
+    epsilon is set to the value of scale.
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (MEAN list) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(MEAN list)</b><br>
+  <p class="summery">Returns artihmitic average of numeric list.</p>
+  <pre class="description">
+    (MEAN '(10 20 30)) &rarr; 20.
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (DIVIDESP A B) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(DIVIDESP A B)</b><br>
+  <p class="summery">Predicate, returns true if b evenly divides a, where b &ne; 0.</p>
+  <pre class="description">
+    (DIVIDESP 12 3) &rarr; T
+    (DIVIDESP 12 5) &rarr; NIL
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (PARITY n &key (bits 64)) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(PARITY n &key (bits 64))</b><br>
+  <p class="summery">Returns even/odd parity for binary value n</p>
+  <pre class="description">
+    (PARITY #B1000) &rarr; 1
+    (PARITY #b1100) &rarr; 0
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (N-COMPLEMENT (gamut list)) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(N-COMPLEMENT (gamut list))</b><br>
+  <p class="summery">Returns list of all number in gamut which are not elements of list.</p>
+  <pre class="description">
+    (N-COMPLEMENT '(2 3 5 7)(1 3 5 7 9 )) &rarr; (2)
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=generic-functions.html class="navigation">Previous: generic-functions </a> &nbsp;<a href=string-utilities.html class="navigation">Next: string-utilities </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  
+</body>
+</html>

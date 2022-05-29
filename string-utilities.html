@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="robots" content="index,follow,archive">
+      <meta name="keywords" content="NIL">
+      <link rel="stylesheet" type="text/css" href="style.css"/>
+      <title>String Utilities</title>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'/>
+  </head>
+  
+<body lang="en-US">
+  <a id="top"></a>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=math-utilities.html class="navigation">Previous: math-utilities </a> &nbsp;<a href=shell-utilities.html class="navigation">Next: shell-utilities </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <h1 class="banner">String Utilities</h1>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (CLONE string &key &allow-other-keys) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(CLONE string &key &allow-other-keys)</b><br>
+  <p class="summery">Returns string</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (FINAL string) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(FINAL string)</b><br>
+  <p class="summery">Returns final character of string</p>
+  <pre class="description">
+    (FINAL &ldquo;abc&rdquo;) &rarr; &ldquo;c&rdquo;
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (BUTFINAL string) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(BUTFINAL string)</b><br>
+  <p class="summery">Returns string with final character removed.</p>
+  <pre class="description">
+    (BUTFINAL &ldquo;abc&rdquo;) &rarr; &ldquo;ab&rdquo;
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (CNTH n string) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(CNTH n string)</b><br>
+  <p class="summery">Returns nth character of string using cyclical indexing.</p>
+  <pre class="description">
+    
+    (CNTH 2 &ldquo;abcd&rdquo;) &rarr; &ldquo;c&rdquo;
+    (CNTH 6 &ldquo;abcd&rdquo;) &rarr; &ldquo;c&rdquo;
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (STR+ &rest args) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(STR+ &rest args)</b><br>
+  <p class="summery">Concatenate string representation of args.</p>
+  <pre class="description">
+    
+    (STR+ &ldquo;ABC&rdquo; 'zac) &rarr; &ldquo;ABCZAC&rdquo;
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (SPACES (&optional (n 1))) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(SPACES (&optional (n 1)))</b><br>
+  <p class="summery">Returns string consisting of n spaces.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (SCOPIES (n &optional (char #&#92;-))) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(SCOPIES (n &optional (char #&#92;-)))</b><br>
+  <p class="summery">Returns string consisting of n copies of character char.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (PARSE-WORD string &optional (delim #&#92;space)) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(PARSE-WORD string &optional (delim #&#92;space))</b><br>
+  <p class="summery">Separates first delimited word from string.</p>
+  <pre class="description">
+    
+    Returns two values:
+       1.  The delineated word
+       2.  The remaining string 
+    The remaining value is nil when argument contains a single word.
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (SPLIT-STRING string &optional (delim #&#92;space)) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(SPLIT-STRING string &optional (delim #&#92;space))</b><br>
+  <p class="summery">Returns list of delineated word in  string.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (STARTS-WITH-P string target) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(STARTS-WITH-P string target)</b><br>
+  <p class="summery">Returns true if initial characters of string are string&#61; to target.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (SFORMAT frmt &rest args) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(SFORMAT frmt &rest args)</b><br>
+  <p class="summery">Convenience version of FORMAT.</p>
+  <pre class="description">
+    (SFORMAT foo...) is equivalent to (FORMAT nil foo...)
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (FORMAT-BINARY n &key (bits 16) group) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(FORMAT-BINARY n &key (bits 16) group)</b><br>
+  <p class="summery">Converts number to binary string</p>
+  <pre class="description">
+    
+    (BINARY-FORMAT 14)   &rarr; &ldquo;0000000000001110&rdquo;
+    (BINARY-FORMAT 14 :GROUP 4) &rarr; &ldquo;0000 0000 0000 1110&rdquo;
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (PALINDROME string &key (elide nil)) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(PALINDROME string &key (elide nil))</b><br>
+  <pre class="description">
+    (PALINDROME &ldquo;ABC&rdquo;) &rarr; &ldquo;ABCCBA&rdquo;
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (PICK string) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(PICK string)</b><br>
+  <p class="summery">Returns random character from string.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (CENTER-STRING test width &optional (shift 0)) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(CENTER-STRING test width &optional (shift 0))</b><br>
+  <p class="summery">Centers text in new string with length width.</p>
+  <pre class="description">
+    
+    text - The text
+    width - length of result.
+    shift - optional amount to shift text right.
+    
+    (CENTER-STRING &ldquo;ABC&rdquo; 9) &rarr; &ldquo;   ABC   &rdquo;
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=math-utilities.html class="navigation">Previous: math-utilities </a> &nbsp;<a href=shell-utilities.html class="navigation">Next: shell-utilities </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  
+</body>
+</html>

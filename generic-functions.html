@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="robots" content="index,follow,archive">
+      <meta name="keywords" content="NIL">
+      <link rel="stylesheet" type="text/css" href="style.css"/>
+      <title>Generic Functions</title>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'/>
+  </head>
+  
+<body lang="en-US">
+  <a id="top"></a>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=specialized-parts.html class="navigation">Previous: specialized-parts </a> &nbsp;<a href=math-utilities.html class="navigation">Next: math-utilities </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <h1 class="banner">Generic Functions</h1>
+  
+  <!-- (-&gt;CYCLE object -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(-&gt;CYCLE object</b><br>
+  <pre class="description">
+    -&gt;CYCLE names a generic function:
+      Lambda-list: (OBJECT)
+      Derived type: (FUNCTION (T) *)
+      Documentation:
+        Coerce object to Cycle pattern.
+        If object is an instance of Cycle, return it.
+        If object is some non-cycle Pattern, return a new Cycle with the elements of object.
+        If object is a list, return new Cycle :of object.
+        For all other types, coerce object to a list and return new Cycle.
+      Method-combination: STANDARD
+      Methods:
+        (-&gt;CYCLE (T))
+        (-&gt;CYCLE (VECTOR))
+        (-&gt;CYCLE (LIST))
+        (-&gt;CYCLE (CYCLE))
+  </pre>
+  
+  <!-- (-&gt;list object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(-&gt;list object)</b><br>
+  <pre class="description">
+    -&gt;LIST names a generic function:
+      Lambda-list: (OBJECT)
+      Derived type: (FUNCTION (T) *)
+      Documentation:
+        Coerce object to a list.
+        If object is a list, return it.
+        If object is some other sequence type, return new list of object's elements.
+        For all other types, create new list with object as its only element.
+        see -&gt;vector
+      Method-combination: STANDARD
+      Methods:
+        (-&gt;LIST (VECTOR))
+        (-&gt;LIST (LIST))
+        (-&gt;LIST (T))
+        (-&gt;LIST (STRING))
+  </pre>
+  
+  <!-- (-&gt;pattern object &key pattern-type) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(-&gt;pattern object &key pattern-type)</b><br>
+  <pre class="description">
+    -&gt;PATTERN names a generic function:
+      Lambda-list: (OBJECT &KEY PATTERN-TYPE)
+      Derived type: (FUNCTION (T &KEY (:PATTERN-TYPE T)) *)
+      Documentation:
+        Coerce object to Pattern of type pattern-type.
+        If object is a pattern-type, return it.
+        If object is a non pattern-type Pattern, return new instance of pattern-type with elements taken
+        from object.
+        For all other types return (pattern-type :of object)
+        The default pattern-type is Cycle.
+      Method-combination: STANDARD
+      Methods:
+        (-&gt;PATTERN (T))
+        (-&gt;PATTERN (PATTERN))
+  </pre>
+  
+  <!-- (-&gt;midi contents &key filename offset repeat pad) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(-&gt;midi contents &key filename offset repeat pad)</b><br>
+  <pre class="description">
+    -&gt;MIDI names a generic function:
+      Lambda-list: (CONTENTS &KEY FILENAME OFFSET REPEAT PAD NO-STRIPE)
+      Derived type: (FUNCTION
+                     (T &KEY (:FILENAME T) (:OFFSET T) (:REPEAT T) (:PAD T))) *)
+                      (:NO-STRIPE T))
+      Documentation:
+        Creates new MIDI file from contents and write to file.
+        :filename - Optional String, if not specified the filename is derived from
+                    the name of contents and the current project.
+        :offset   - float, initial offset time in seconds, default 0.
+        :repeat   - int, number of times to repeat contents, default 1.  If repeat is too 
+        large stack depth may be exhausted.           
+        :pad      - float, number of seconds to add to end of file, default 2.
+      Method-combination: STANDARD
+      Methods:
+        (-&gt;MIDI (SECTION))
+          Documentation:
+            Write section contents to Standard MIDI file.
+  </pre>
+  
+  <!-- (-&gt;string object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(-&gt;string object)</b><br>
+  <pre class="description">
+    -&gt;STRING names a generic function:
+      Lambda-list: (OBJECT)
+      Derived type: (FUNCTION (T) *)
+      Documentation:
+        Returns string representation of object.
+      Method-combination: STANDARD
+      Methods:
+        (-&gt;STRING (TIME-SIGNATURE))
+        (-&gt;STRING (SMF))
+        (-&gt;STRING (MIDI-KEY-SIGNATURE))
+        (-&gt;STRING (MIDI-TIME-SIGNATURE))
+        (-&gt;STRING (MIDI-TEMPO-MESSAGE))
+        (-&gt;STRING (MIDI-META-TEXT))
+        (-&gt;STRING (MIDI-META-MESSAGE))
+        (-&gt;STRING (MIDI-SYSTEM-EXCLUSIVE))
+        (-&gt;STRING (MIDI-SYSTEM-COMMON-MESSAGE))
+        (-&gt;STRING (MIDI-CHANNEL-MESSAGE))
+        (-&gt;STRING (MIDI-MESSAGE))
+        (-&gt;STRING (CYCO-NODE))
+        (-&gt;STRING (PATTERN))
+        (-&gt;STRING (LIST))
+        (-&gt;STRING (STRING))
+        (-&gt;STRING (T))
+  </pre>
+  
+  <!-- (-&gt;symbol arg &optional package) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(-&gt;symbol arg &optional package)</b><br>
+  <pre class="description">
+    -&gt;SYMBOL names a generic function:
+      Lambda-list: (ARG &OPTIONAL PACKAGE)
+      Derived type: (FUNCTION (T &OPTIONAL T) *)
+      Documentation:
+        Intern new symbol using name of argument.
+      Method-combination: STANDARD
+      Methods:
+        (-&gt;SYMBOL (NUMBER))
+        (-&gt;SYMBOL (STRING))
+        (-&gt;SYMBOL (SYMBOL))
+  </pre>
+  
+  <!-- (-&gt;vector object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(-&gt;vector object)</b><br>
+  <pre class="description">
+    -&gt;VECTOR names a generic function:
+      Lambda-list: (OBJECT)
+      Derived type: (FUNCTION (T) *)
+      Documentation:
+        Coerce object to vector.
+        If object is a vector, return it.
+        If object is a non-vector sequence, return new vector using elements of object.
+        For all other cases return new vector with object as its only element.
+        See -&gt;list
+      Method-combination: STANDARD
+      Methods:
+        (-&gt;VECTOR (VECTOR))
+        (-&gt;VECTOR (LIST))
+        (-&gt;VECTOR (T))
+  </pre>
+  
+  <!-- (? object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(? object)</b><br>
+  <pre class="description">
+    ? names a generic function:
+      Lambda-list: (OBJECT)
+      Derived type: (FUNCTION (T) *)
+      Documentation:
+        Generalized help/inspection function.
+      Method-combination: STANDARD
+      Methods:
+        (? (INTEGER))
+        (? (SHIFT-REGISTER))
+        (? (INSTRUMENT))
+        (? (CYCO-NODE))
+        (? (SYMBOL))
+        (? (T))
+  </pre>
+  
+  <!-- (add-group section group) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(add-group section group)</b><br>
+  <pre class="description">
+    ADD-GROUP names a generic function:
+      Lambda-list: (SECTION GROUP)
+      Argument precedence order: (SECTION GROUP)
+      Derived type: (FUNCTION (T T) *)
+      Documentation:
+        Adds group to section.
+      Method-combination: STANDARD
+      Methods:
+        (ADD-GROUP (SECTION GROUP))
+  </pre>
+  
+  <!-- (articulation-map object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(articulation-map object)</b><br>
+  <pre class="description">
+    ARTICULATION-MAP names a generic function:
+      Lambda-list: (OBJECT)
+      Derived type: (FUNCTION (T) *)
+      Documentation:
+        Returns object's articulation-map.
+      Method-combination: STANDARD
+      Methods:
+        (ARTICULATION-MAP (INSTRUMENT))
+  </pre>
+  
+  <!-- (set-articulation-map object mapfn) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(set-articulation-map object mapfn)</b><br>
+  <pre class="description">
+    SET-ARTICULATION-MAP names a generic function:
+      Lambda-list: (OBJECT MAPFN)
+      Argument precedence order: (OBJECT MAPFN)
+      Derived type: (FUNCTION (T T) *)
+      Documentation:
+        Sets object's articulation-map
+      Method-combination: STANDARD
+      Methods:
+        (SET-ARTICULATION-MAP (INSTRUMENT FUNCTION))
+  </pre>
+  
+  <!-- (bar-duration time-signature) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(bar-duration time-signature)</b><br>
+  <pre class="description">
+    BAR-DURATION names a generic function:
+      Lambda-list: (TIME-SIGNATURE)
+      Derived type: (FUNCTION (T) *)
+      Documentation:
+        Returns duration of single bar from time-signature.
+      Method-combination: STANDARD
+      Methods:
+        (BAR-DURATION (TIME-SIGNATURE))
+  </pre>
+  
+  <!-- (bars time-signature) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(bars time-signature)</b><br>
+  <pre class="description">
+    BARS names a generic function:
+      Lambda-list: (TIME-SIGNATURE)
+      Derived type: (FUNCTION (T) *)
+      Documentation:
+        Returns time-signature bar count.
+      Method-combination: STANDARD
+      Methods:
+        (BARS (TIME-SIGNATURE))
+  </pre>
+  
+  <!-- (set-bars time-signature value) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(set-bars time-signature value)</b><br>
+  <pre class="description">
+    SET-BARS names a generic function:
+      Lambda-list: (TIME-SIGNATURE VALUE)
+      Argument precedence order: (TIME-SIGNATURE VALUE)
+      Derived type: (FUNCTION (T T) *)
+      Documentation:
+        Sets time-signature bar count.
+      Method-combination: STANDARD
+      Methods:
+        (SET-BARS (TIME-SIGNATURE NUMBER))
+  </pre>
+  
+  <!-- (beat-duration time-signature) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(beat-duration time-signature)</b><br>
+  <pre class="description">
+    BEAT-DURATION names a generic function:
+      Lambda-list: (TIME-SIGNATURE)
+      Derived type: (FUNCTION (T) *)
+      Documentation:
+        Returns time-signature beat duration.
+      Method-combination: STANDARD
+      Methods:
+        (BEAT-DURATION (TIME-SIGNATURE))
+  </pre>
+  
+  <!-- (beats time-signature) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(beats time-signature)</b><br>
+  <pre class="description">
+    BEATS names a generic function:
+      Lambda-list: (TIME-SIGNATURE)
+      Derived type: (FUNCTION (T) *)
+      Documentation:
+        Returns time-signature beat count.
+      Method-combination: STANDARD
+      Methods:
+        (BEATS (TIME-SIGNATURE))
+  </pre>
+  
+  <!-- (set-beats time-signature value) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(set-beats time-signature value)</b><br>
+  <pre class="description">
+    SET-BEATS names a generic function:
+      Lambda-list: (TIME-SIGNATURE VALUE)
+      Argument precedence order: (TIME-SIGNATURE VALUE)
+      Derived type: (FUNCTION (T T) *)
+      Documentation:
+        Sets time-signature beat count.
+      Method-combination: STANDARD
+      Methods:
+        (SET-BEATS (TIME-SIGNATURE NUMBER))
+  </pre>
+  
+  <!-- (butfinal object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(butfinal object)</b><br>
+  <pre class="description">
+    BUTFINAL names a generic function:
+      Lambda-list: (OBJECT)
+      Derived type: (FUNCTION (T) *)
+      Documentation:
+        Returns all but final element of sequence.
+        (butfinal '(a b c)) --> (a b)
+      Method-combination: STANDARD
+      Methods:
+        (BUTFINAL (VECTOR))
+        (BUTFINAL (LIST))
+        (BUTFINAL (T))
+        (BUTFINAL (STRING))
+  </pre>
+  
+  <!-- (pattern-length object &key &allow-other-keys) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(pattern-length object &key &allow-other-keys)</b><br>
+  <pre class="description">
+    PATTERN-LENGTH names a generic function:
+      Lambda-list: (OBJECT &KEY &ALLOW-OTHER-KEYS)
+      Derived type: (FUNCTION (T &KEY (:MAX T) &ALLOW-OTHER-KEYS) *)
+      Documentation:
+        Returns period length of pattern.
+      Method-combination: STANDARD
+      Methods:
+        (PATTERN-LENGTH (EUCLID))
+        (PATTERN-LENGTH (ALLOY))
+        (PATTERN-LENGTH (LOGISTIC))
+        (PATTERN-LENGTH (BONES))
+        (PATTERN-LENGTH (RECAMAN))
+        (PATTERN-LENGTH (HAILSTONE))
+        (PATTERN-LENGTH (SHIFT-REGISTER))
+        (PATTERN-LENGTH (ASR-ENVELOPE))
+        (PATTERN-LENGTH (RAMP))
+        (PATTERN-LENGTH (COUNTER))
+        (PATTERN-LENGTH (CONSTANT-VALUE))
+        (PATTERN-LENGTH (SAMPLE-AND-HOLD))
+        (PATTERN-LENGTH (SLOWGLASS))
+        (PATTERN-LENGTH (WALKER))
+        (PATTERN-LENGTH (WRAPPER))
+        (PATTERN-LENGTH (DICE))
+        (PATTERN-LENGTH (COIN))
+        (PATTERN-LENGTH (PATTERN))
+        (PATTERN-LENGTH (SEQUENCE))
+        (PATTERN-LENGTH (T))
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=specialized-parts.html class="navigation">Previous: specialized-parts </a> &nbsp;<a href=math-utilities.html class="navigation">Next: math-utilities </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  
+</body>
+</html>
