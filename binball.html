@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="robots" content="index,follow,archive">
+      <meta name="keywords" content="NIL">
+      <link rel="stylesheet" type="text/css" href="style.css"/>
+      <title>BinBall</title>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'/>
+  </head>
+  
+<body lang="en-US">
+  <a id="top"></a>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=xball.html class="navigation">Previous: xball </a> &nbsp;<a href=controllers.html class="navigation">Next: controllers </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <img class="center" src="images/binball.png" alt="binball"/>
+  <h1 class="banner">BINBALL & BINXBALL</h1>
+  <p class="body">
+    The <b>BINBALL</b> and <b>BINXBALL</b> macros combine a 
+    <a href='bincue.html'>BINCUE</a> object with a 
+    <a href='qball.html'>QBALL</a> and
+    <a href='xball.html'>XBALL</a> respectively.  The resulting objects appear
+    as QBALLs or XBALLs in the project tree.
+  </p>
+  <p class="body">
+    The argument list for both BINBALL and BINXBALL are identical
+    to their respective part types with the following exceptions.
+    <ul>
+      <li>There is no <b>:cuefn</b> keyword.</li>
+      <li>The <b>:cue</b> keyword takes a 'binary cue-list' as per BINCUE.</li>
+      <li>There is a new <b>:symbols</b> keyword to define user BINCUE symbols.</li>
+      <li>The is a new <b>:use-subbeats</b> keyword to switch between subbeats and tsubbeats.</li>
+    </ul>
+  </p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (BINBALL name instruments &key ...) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(BINBALL name instruments &key ...)</b><br>
+  <p class="summery">Creates new QBALL using binary-cuelist and bound to name.</p>
+  <pre class="description">
+    Keywords
+        :section 
+        :shuffle 
+        :shift 
+        :tempo 
+        :unit 
+        :bars 
+        :beats 
+        :subbeats 
+        :render-once 
+        :transposable 
+        :reversible  
+        :cue 
+        :key 
+        :dur 
+        :amp 
+        :reset-on-repeat 
+        :remarks 
+        :symbols 
+        :use-subbeats 
+        :print-cue-list
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (BINXBALL name instrument &key ...) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(BINXBALL name instrument &key ...)</b><br>
+  <p class="summery">Creates new XBALL using binary-cuelist and bound to name.</p>
+  <pre class="description">
+    keywords
+       :section 
+       :shuffle 
+       :shift 
+       :render-once 
+       :tempo 
+       :unit 
+       :bars 
+       :beats
+       :subbeats 
+       :transposable 
+       :reversible 
+       :chord-model 
+       :cue 
+       :key
+       :dur 
+       :amp 
+       :chord 
+       :inversion 
+       :octave 
+       :strum 
+       :end-together
+       :direction 
+       :reset-on-repeat 
+       :symbols 
+       :remarks
+       :print-cue-list 
+       :use-subbeats
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=xball.html class="navigation">Previous: xball </a> &nbsp;<a href=controllers.html class="navigation">Next: controllers </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  
+</body>
+</html>

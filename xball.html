@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="robots" content="index,follow,archive">
+      <meta name="keywords" content="NIL">
+      <link rel="stylesheet" type="text/css" href="style.css"/>
+      <title>XBall Parts</title>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'/>
+  </head>
+  
+<body lang="en-US">
+  <a id="top"></a>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=qball.html class="navigation">Previous: qball </a> &nbsp;<a href=binball.html class="navigation">Next: binball </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <img class="center" src="images/xball.png" alt="xball"/>
+  <h1 class="banner">XBall</h1>
+  <p class="body">
+    An <b>XBALL</b> combines the features of a 
+    <a href='qball.html'>QBALL</a> (the use of patterns to recombine
+    parameters) and a <a href='strummer.html'>STRUMMER</a> (the use of named
+    chords and note strumming).   Additionally most XBALL parameters may use 
+    <nobr><a href='pattern-comprehension.html'>pattern&nbsp;comprehension</a>.
+  </p>
+  <p class="body">
+    Since most XBALL features are detailed elsewhere, only
+    where the XBALL deviates from the QBALL and STRUMMER will be listed here.
+  </p>
+  
+  <!-- (MAKE-XBALL name instrument &key ...) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(MAKE-XBALL name instrument &key ...)</b><br>
+  
+  <!-- (XBALL name instrument &key ...) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(XBALL name instrument &key ...)</b><br>
+  <p class="summery">Creates new instance of XBALL.</p>
+  <pre class="description">
+    XBALL and MAKE-XBALL are identical except the later binds the new instance
+    to the symbol name while the former does not.  The name argument should be
+    quoted for MAKE-XBALL and unquoted for XBALL.
+    
+    Unlike a QBALL, an XBALL may only use single instrument.
+    
+    Keywords:
+    
+       :section      - Defaults to current <a href='sections.html'>section</a>
+       :cuefn        - Defaults to section value.
+       :shuffle      - Defaults to section value.
+       :shift        - Defaults to 0.0
+       :render-once  - Defaults to NIL
+       :tempo        - Defaults to section value. 
+       :unit         - Defaults to section value.
+       :bars         - Defaults to section value.
+       :beats        - Defaults to section value.
+       :subbeats     - Defaults to section value.
+       :transposable - Defaults to t
+       :reversible   - Defaults to t
+       :chord-model  - Defaults to section value.
+       :cue          - As with QBALL
+       :key          - As with QBALL except nested list are not allowed.
+                       May use pattern comprehension
+       :dur          - As with QBALL, may use pattern comprehension.
+       :amp          - As with QBALL, may use pattern comprehension.
+       :chord        - As with STRUMMER, may take pattern comprehension.
+       :inversion    - As with STRUMMER, may take pattern comprehension.
+       :octave       - As with STRUMMER, may take pattern comprehension.
+       :strum        - As with STRUMMER, may take pattern comprehension.
+       :direction    - As with STRUMMER, may take pattern comprehension.
+       :end-together - As with STRUMMER.
+       :remarks      - Optional remarks text
+       :reset-on-repeat - As with QBALL.
+  </pre>
+  <p class="body">
+    See <a href='binball.html'>BINXBALL</a> for a version of XBALL which uses 
+    <a href='bincue.html'>binary cuelist</a>.
+  </p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=qball.html class="navigation">Previous: qball </a> &nbsp;<a href=binball.html class="navigation">Next: binball </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  
+</body>
+</html>

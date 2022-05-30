@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="robots" content="index,follow,archive">
+      <meta name="keywords" content="NIL">
+      <link rel="stylesheet" type="text/css" href="style.css"/>
+      <title>Binary Cuelist</title>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'/>
+  </head>
+  
+<body lang="en-US">
+  <a id="top"></a>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=cue-cheatsheet.html class="navigation">Previous: cue-cheatsheet </a> &nbsp;<a href=projects.html class="navigation">Next: projects </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <img class="center" src="images/bincue.png" alt="bincue"/>
+  <h1 class="banner">Binary Cuelist</h1>
+  <p class="body">
+    A <i>Binary Cuelist</i> is a cuelist where event times are
+    indicated by binary values.  The primary advantage is that a binary
+    value gives a visual representation of the rhythm.
+  </p>
+  <p class="body">
+    The <a href='binball.html'>BINBALL and BINXBALL</a> macros combine
+    a BINCUE object with <a href='qball.html'>QBALL</a> and 
+    <a href='xball.html'>XBALL</a> parts.
+  </p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (BINCUE &key symbols timesig use-subbeats) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(BINCUE &key symbols timesig use-subbeats)</b><br>
+  <p class="summery">Returns a BINCUE object which translates a binary-cuelist to the form
+    expected by the <a href='cue-functions.html#bar'>BAR</a> cue function.</p>
+  <pre class="description">
+    
+    :symbols - Association list of user symbol expansions.   The BINCUE
+               provides several short-hand symbols which may be used in the
+               cuelist.  The user may define additional symbols as an
+               association list:
+    
+               :symbols '((clave-1 . &ldquo;1000 0010 0010 0000&rdquo;)
+                          (clave-2 . &ldquo;0000 1000 1000 0000&rdquo;)) 
+    
+               Use the <b>?BINCUE</b> method for a list of available symbols. 
+                          
+    
+    :timesig - Time signature or time signature desiccator.
+               The time signature must match the signature for the part(s)
+               using the binary cuelist.  The default uses the time signature of 
+               the current <a href='sections.html'>section</a> of the current <a href='projects.html'>project</a>.
+    
+               Alternatively any time-signature object may be used or a list of the form 
+               (bar beat subbeats)
+    
+               :timesig '(8 6 4) ;; 8-bars 6/4 time with 4 subbeats per beat.
+    
+    
+    :use-subbeats - Boolean, by default the time-signature subbeats (typically sixteenth notes) 
+                    are used for the base time unit.  Set this value to nil to use the tsbubeats 
+                    (16th note triplets) instead.  
+    
+                    <b>Tsubbeats may only be used if subbeats is even.</b>
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (?BINCUE bincue-object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(?BINCUE bincue-object)</b><br>
+  <p class="summery">Displays available cuelist symbols.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (BINCUE-TRANSLATE bincue-object binary-cuelist) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(BINCUE-TRANSLATE bincue-object binary-cuelist)</b><br>
+  <p class="summery">Performs translation of binary cuelist to <a href='cue-functions.html#bar'>BAR</a> form.</p>
+  <pre class="description">
+    Example
+    (param bc (BINCUE :timesig '(2 4 4)))
+    (param cuelist (BINCUE-TRANSLATE bc '(1000 0010 0010 0010
+                                          1010 0010 0010 0000)))
+    
+    (print cuelist) &#8594 ((1 1 1)(1 2 3)(1 3 3)(1 4 3)(2 1 1)(2 1 3)(2 2 3)(2 3 3))
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=cue-cheatsheet.html class="navigation">Previous: cue-cheatsheet </a> &nbsp;<a href=projects.html class="navigation">Next: projects </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  
+</body>
+</html>
