@@ -35,6 +35,15 @@
       <li>The is a new <b>:use-subbeats</b> keyword to switch between subbeats and tsubbeats.</li>
     </ul>
   </p>
+  <p class="body">
+    The cue-list may take the special form 
+    <b>(EUCLID&nbsp;POINTS&nbsp;SHIFT)</b> to produce <a href='https://splice.com/blog/euclidean-rhythms/'>
+    Euclidean Rhythms</a>.  POINTS is the number of events to generate and should be a positive integer 
+    less then the <b>total</b> number of time-signature subbeats.   Use the <a href='time-signature.html'>
+    TIME-SIGNATURE</a> method <b>(CUE-POINTS&nbsp;tsig)</b> for the maximum allowed value.<br><br>
+    
+    SHIFT is the number of subbeats to shift the rhythm, default 0.
+  </p>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   
   <!-- (BINBALL name instruments &key ...) -->

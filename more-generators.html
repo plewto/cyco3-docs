@@ -148,6 +148,34 @@
         (param ec (euclid 8 9))
         (next ec 9)  &rarr; (0 1 2 3 4 4 5 6 7)
   </pre>
+  
+  <!-- (EUCLID->BINARY-CUELIST points &key shift timesig use-subbeats) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(EUCLID->BINARY-CUELIST points &key shift timesig use-subbeats)</b><br>
+  <p class="summery">Generates Euclidean 'binary-cuelist' for use with <a href='bincue.html'>BINCUE</a>,
+  <a href='binball.html'>BINBALL</a>.</p>
+  <pre class="description">
+    
+    points        - Number of events.  where 0 &lt; points &le; total-subbeats.
+                    The time-signature method <b>(CUE-POINTS tsig)</b> returns
+                    the maximum allowed value for points.
+    
+    :shift        - Integer, number of subbeats to shift rhythm, default 0.
+    :timesig      - Reference time-signature. May be one of the following.
+    
+                      * An instance of <a href='time-signature.html'>TIME-SIGNATURE</a>
+                      * A list of form (bars beats subbeats)
+                      * nil (the default)
+    
+                    If timesig is nil the current-section of *PROJECT* is used.
+                    If there is no current-section, then *project* is used.
+                    Finally if *project* is nil a fall-back 2-bar signature is
+                    used. 
+                    
+    :use-subbeats - If true use time-signature subbeats as the base unit,
+                    otherwise use tsubbeats. Default T.
+  </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a href=index.html class="link">Home</a> &nbsp;<a href=alloy.html class="navigation">Previous: alloy </a> &nbsp;<a href=pattern-comprehension.html class="navigation">Next: pattern-comprehension </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
   
