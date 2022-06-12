@@ -10,6 +10,8 @@ body {
     background-image: url("images/background1.png");
     color: #FFFFCC;
     width: 1500px;
+    line-height: 1.2em;    
+
 }
 
 a {
@@ -160,5 +162,9 @@ strong {
 
 
 ul {
+    line-height: 1.5em;
+}
+
+ol {
     line-height: 1.5em;
 }
