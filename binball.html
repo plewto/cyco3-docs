@@ -30,20 +30,51 @@
     to their respective part types with the following exceptions.
     <ul>
       <li>There is no <b>:cuefn</b> keyword.</li>
-      <li>The <b>:cue</b> keyword takes a 'binary cue-list' as per BINCUE.</li>
+      <li>The <b>:cue</b> keyword takes a 'binary cue-list' as per BINCUE,
+    or a special form for <a href='euclid.html'>Euclidean rhythms</a>.
       <li>There is a new <b>:symbols</b> keyword to define user BINCUE symbols.</li>
       <li>The is a new <b>:use-subbeats</b> keyword to switch between subbeats and tsubbeats.</li>
+      <li>There is a new <b>:duck</b> keyword for cuelist <a href='duck.html'>ducking</a>.</li>
     </ul>
   </p>
   <p class="body">
-    The cue-list may take the special form 
-    <b>(EUCLID&nbsp;POINTS&nbsp;SHIFT)</b> to produce <a href='https://splice.com/blog/euclidean-rhythms/'>
-    Euclidean Rhythms</a>.  POINTS is the number of events to generate and should be a positive integer 
-    less then the <b>total</b> number of time-signature subbeats.   Use the <a href='time-signature.html'>
-    TIME-SIGNATURE</a> method <b>(CUE-POINTS&nbsp;tsig)</b> for the maximum allowed value.<br><br>
-    
-    SHIFT is the number of subbeats to shift the rhythm, default 0.
+    The cuelist may take any of the following forms:
+    <ol>
+     <li>Binary cuelist as per <a href='bincue.html'>BINCUE</a>.</li>
+     <li>(EUCLID points shift invert) as with <a href='euclid.html#euclid'>EUCLID</a>.</li>
+     <li>(EUCLID2 split (p1 s1 i1)(p2 s2 i2)) for use with <a href='euclid.html#euclid2'>EUCLID2</a>.<br>
+         Where split is the bar number.  If nil the half way point is selected.<br>
+         (p1 s1 i1) are the point, split and invert arguments respectively for the first rhythm.<br>
+         (p2 s2 i2) are arguments for the 2nd rythom.</li>
+    </ol>
   </p>
+  <p class="body">
+    The :DUCK argument may be:
+    <ol>
+      <li>A <a href='cue-functions.html#bar'>BAR</a> format cuelist.</li>
+      <li>A binary string  &ldquo;1100 1001 ...&rdquo; cuelist. White space is ignored.
+      <li>Another part object.</li>
+    </ol>
+  </p>
+  <pre class="description">
+    (section a)
+    
+    (binball a-kick kick
+    	 :bars 1
+    	 :cue '(1000 1000 1000 1000)
+    	 :key 'X
+    	 :amp 'ff)
+    
+    (binball a-hat hat
+    	 :bars 1
+    	 :duck a-kick
+    	 :cue '(euclid 0.75)
+    	 :key 'X)
+    
+    (pprint-cuelist (property a-hat :cuelist))
+    ;; &rarr; (1 1 3) (1 1 4) (1 2 3) (1 2 4) (1 3 3) (1 3 4) (1 4 3) (1 4 4) 
+    ;; Hat never hits on a kick down beat.
+  </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   
   <!-- (BINBALL name instruments &key ...) -->
@@ -63,7 +94,8 @@
         :subbeats 
         :render-once 
         :transposable 
-        :reversible  
+        :reversible 
+        :duck 
         :cue 
         :key 
         :dur 
@@ -95,6 +127,7 @@
        :transposable 
        :reversible 
        :chord-model 
+       :duck
        :cue 
        :key
        :dur 
