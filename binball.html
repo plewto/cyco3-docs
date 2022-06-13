@@ -71,7 +71,6 @@
     	 :cue '(euclid 0.75)
     	 :key 'X)
     
-    (pprint-cuelist (property a-hat :cuelist))
     ;; &rarr; (1 1 3) (1 1 4) (1 2 3) (1 2 4) (1 3 3) (1 3 4) (1 4 3) (1 4 4) 
     ;; Hat never hits on a kick down beat.
   </pre>
@@ -84,27 +83,26 @@
   <p class="summery">Creates new QBALL using binary-cuelist and bound to name.</p>
   <pre class="description">
     Keywords
-        :section 
-        :shuffle 
-        :shift 
-        :tempo 
-        :unit 
-        :bars 
-        :beats 
-        :subbeats 
-        :render-once 
-        :transposable 
-        :reversible 
-        :duck 
-        :cue 
-        :key 
-        :dur 
-        :amp 
-        :reset-on-repeat 
-        :remarks 
-        :symbols 
-        :use-subbeats 
-        :print-cue-list
+        :section         - as per <a href='qball.html'>QBALL</a>
+        :shuffle         - as per QBALL 
+        :shift           - as per QBALL 
+        :tempo           - as per QBALL 
+        :unit            - as per QBALL 
+        :bars            - as per QBALL 
+        :beats           - as per QBALL 
+        :subbeats        - as per QBALL 
+        :render-once     - as per QBALL
+        :transposable    - as per QBALL 
+        :reversible      - as per QBALL 
+        :duck            - see above
+        :cue             - see above
+        :key             - as per QBALL 
+        :dur             - as per QBALL 
+        :amp             - as per QBALL 
+        :reset-on-repeat - as per QBALL
+        :remarks         - as per QBALL 
+        :symbols         - as per <a href='bincue.html'>BINCUE</a>
+        :use-subbeats    - as per BINCUE
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   
@@ -115,34 +113,33 @@
   <p class="summery">Creates new XBALL using binary-cuelist and bound to name.</p>
   <pre class="description">
     keywords
-       :section 
-       :shuffle 
-       :shift 
-       :render-once 
-       :tempo 
-       :unit 
-       :bars 
-       :beats
-       :subbeats 
-       :transposable 
-       :reversible 
-       :chord-model 
-       :duck
-       :cue 
-       :key
-       :dur 
-       :amp 
-       :chord 
-       :inversion 
-       :octave 
-       :strum 
-       :end-together
-       :direction 
-       :reset-on-repeat 
-       :symbols 
-       :remarks
-       :print-cue-list 
-       :use-subbeats
+       :section         - as per <a href='xball.html'>XBALL</a>
+       :shuffle         - as per XBALL
+       :shift           - as per XBALL
+       :render-once     - as per XBALL
+       :tempo           - as per XBALL
+       :unit            - as per XBALL
+       :bars            - as per XBALL
+       :beats           - as per XBALL
+       :subbeats        - as per XBALL
+       :transposable    - as per XBALL
+       :reversible      - as per XBALL
+       :chord-model     - as per XBALL
+       :duck            - see above
+       :cue             - see above
+       :key             - as per XBALL
+       :dur             - as per XBALL
+       :amp             - as per XBALL
+       :chord           - as per XBALL
+       :inversion       - as per XBALL
+       :octave          - as per XBALL
+       :strum           - as per XBALL
+       :end-together    - as per XBALL
+       :direction       - as per XBALL
+       :reset-on-repeat - as per XBALL
+       :symbols         - as per <a href='bincue.html'>BINCUE</a>
+       :use-subbeats    - as per BINCUE
+       :remarks         - as per XBALL
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a href=index.html class="link">Home</a> &nbsp;<a href=xball.html class="navigation">Previous: xball </a> &nbsp;<a href=controllers.html class="navigation">Next: controllers </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
