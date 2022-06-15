@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="robots" content="index,follow,archive">
+      <meta name="keywords" content="NIL">
+      <link rel="stylesheet" type="text/css" href="style.css"/>
+      <title>CUELIST and PPRINT-CUELIST</title>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'/>
+  </head>
+  
+<body lang="en-US">
+  <a id="top"></a>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=bincue.html class="navigation">Previous: bincue </a> &nbsp;<a href=mask-cuelist.html class="navigation">Next: mask-cuelist </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <h1 class="banner">CUELIST and PPRINT-CUELIST</h1>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a id="cuelist"></a>
+  
+  <!-- (CUELIST object &key form timesig use-subbeats) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(CUELIST object &key form timesig use-subbeats)</b><br>
+  <p class="summery">Returns cuelist from object.</p>
+  <pre class="description">
+    
+    object   - May be any of the following:
+                 1. A cuelist in <a href='cue-functions.html#bar'>standard BAR</a> form.
+                 2. A string of binary digits &quot;1100 1010 1000 1101&quot;,  white space is ignored.
+                 2. A <a href='parts.html'>PART</a> object.
+    
+    :form    - Result format.  By default CUELIST returns a list in BAR format.
+               If :form is :binary, the result is a binary-string.
+    
+    :timesig - Reference <a href='time-signature.html'>time-signature</a>, may be one of:
+                 1. Any instance of time-signature, such as a <a href='projects.html'>project</a>, <a href='sections.html'>section</a> or <a href='parts.html'>part</a>.
+                 2. A list of form '(bars beats subbeats) to use a local time-signature.
+                 3. NIL.  The default is to use the current-section of *project*.
+                    If there is no current-section, then *project* itself is used.
+                    If *project* is nil, a fallback 2-bar signature in 4/4 time is used.
+    
+    :use-subbeats - Boolean, if true use time-signatures subbeats (typically four 16th notes per beat)
+                    as the shortest time interval.   Otherwise use tsubbeats (typically six 16th note 
+                    triplets per beat).  The default is t for subbeats.
+    
+    It is important that the time-signature matches the expected signature of the object argument. 
+    They do not have to be completely the same. At a minimum the bar-count, beats-per-bar, and 
+    subbeats-per-beat must match, otherwise you will get unexpected results.
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a id="pprint-cuelist"></a>
+  
+  <!-- (PPRINT-CUELIST object &key header form timesig use-subbeats) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(PPRINT-CUELIST object &key header form timesig use-subbeats)</b><br>
+  <p class="summery">Pretty prints cuelist.</p>
+  <pre class="description">
+    
+    With exception of the additional :header keyword, arguments to PPRINT-CUELIST are 
+    identical to CUELIST.
+    
+    :header - Prints optional header text
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=bincue.html class="navigation">Previous: bincue </a> &nbsp;<a href=mask-cuelist.html class="navigation">Next: mask-cuelist </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  
+</body>
+</html>

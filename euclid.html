@@ -14,7 +14,7 @@
   
 <body lang="en-US">
   <a id="top"></a>
-  <a href=index.html class="link">Home</a> &nbsp;<a href=duck.html class="navigation">Previous: duck </a> &nbsp;<a href=projects.html class="navigation">Next: projects </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <a href=index.html class="link">Home</a> &nbsp;<a href=mask-cuelist.html class="navigation">Previous: mask-cuelist </a> &nbsp;<a href=projects.html class="navigation">Next: projects </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <img class="center" src="images/euclid.png" alt="euclid"/>
   <h1 class="banner">Euclidean Rhythms</h1>
@@ -31,10 +31,10 @@
   </p>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   
-  <!-- (EUCLID-&GT;BINARY-CUELIST length points &key shift invert) -->
+  <!-- (EUCLID-&GT;BINARY-CUELIST length points &key rot invert) -->
   <!--  -->
   <!--  -->
-  <b class="definition">(EUCLID-&GT;BINARY-CUELIST length points &key shift invert)</b><br>
+  <b class="definition">(EUCLID-&GT;BINARY-CUELIST length points &key rot invert)</b><br>
   <p class="summery">Creates binary cuelist with a Euclidean rhythm.</p>
   <pre class="description">
     
@@ -43,29 +43,29 @@
               * Integer, absolute number of events.  0 &lt; points &le; length.
               * Float, number of events relative to length.  0.0 &lt; points &le; 1.0
               * NIL, random number of events.
-    :shift  - Amount of pattern rotation, may be an integer, float or nil.
+    :rot    - Amount of pattern rotation, may be an integer, float or nil.
               * Integer, absolute. Default 0
-              * Float, shift relative to length.  0.0 &lt; points &le; 1.0
-              * NIL, random shift.
+              * Float, rotation relative to length.  0.0 &lt; points &le; 1.0
+              * NIL, random rotation.
     :invert - Boolean, if true invert event selection.
     
     (EUCLID-&GT;BINARY-CUELIST 8 5)            &rarr; &ldquo;10110110&rdquo;
     (EUCLID-&GT;BINARY-CUELIST 8 5 :INVERT T ) &rarr; &ldquo;01001001&rdquo;
-    (EUCLID-&GT;BINARY-CUELIST 8 5 :SHIFT 4)   &rarr; &ldquo;01101011&rdquo;
+    (EUCLID-&GT;BINARY-CUELIST 8 5 :ROT 4)   &rarr; &ldquo;01101011&rdquo;
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="euclid"></a>
   
-  <!-- (EUCLID points &key shift invert timesig use-subbeats) -->
+  <!-- (EUCLID points &key rot invert timesig use-subbeats) -->
   <!--  -->
   <!--  -->
-  <b class="definition">(EUCLID points &key shift invert timesig use-subbeats)</b><br>
+  <b class="definition">(EUCLID points &key rot invert timesig use-subbeats)</b><br>
   <p class="summery">Creates Euclidean cuelist in <a href='cue-functions.html#bar'>bar</a> format: ((BAR&nbsp;BEAT&nbsp;SUBBEAT)...)<br>
   The rhythmic length is set by the timesig argument.</p>
   <pre class="description">
     
     points   - Number of events. May be integer, float or nil as per EUCLID-&GT;BINARY-CUELIST function.
-    :shift   - Rhythmic shift. May be integer, float or nil as per EUCLID-&GT;BINARY-CUELIST function.
+    :rot     - Rhythmic rotation. May be integer, float or nil as per EUCLID-&GT;BINARY-CUELIST function.
     :invert  - Boolean, if true invert selected events.
     :timesig - Reference <a href='time-signature.html'>time-signature</a>. May be one of the following.
                * An instance of TIME-SIGNATURE
@@ -85,17 +85,17 @@
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="euclid2"></a>
   
-  <!-- (EUCLID2 p1 p2 &key s1 s2 inv1 inv2 split timesig use-subbeats) -->
+  <!-- (EUCLID2 p1 p2 &key r1 r2 inv1 inv2 split timesig use-subbeats) -->
   <!--  -->
   <!--  -->
-  <b class="definition">(EUCLID2 p1 p2 &key s1 s2 inv1 inv2 split timesig use-subbeats)</b><br>
+  <b class="definition">(EUCLID2 p1 p2 &key r1 r2 inv1 inv2 split timesig use-subbeats)</b><br>
   <p class="summery">Splices two Euclidean cuelist together.</p>
   <pre class="description">
     
     p1     - Rhythm 1 points. May be integer, float or nil as with EUCLID.
     p2     - Rhythm 2 points.
-    :s1    - Rhythm 1 shift. May be integer, float or nil as with EUCLID.
-    :s2    - Rhythm 2 shift.
+    :r1    - Rhythm 1 rotation. May be integer, float or nil as with EUCLID.
+    :r2    - Rhythm 2 rotation.
     :inv1  - Rhythm 1 invert flag. 
     :inv2  - Rhythm 2 invert flag.
     :split - Splice point bar number. Defaults to half time-signature bar-count.
@@ -103,7 +103,7 @@
     :use-subbeats - Boolean, as with EUCLID function.
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
-  <a href=index.html class="link">Home</a> &nbsp;<a href=duck.html class="navigation">Previous: duck </a> &nbsp;<a href=projects.html class="navigation">Next: projects </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <a href=index.html class="link">Home</a> &nbsp;<a href=mask-cuelist.html class="navigation">Previous: mask-cuelist </a> &nbsp;<a href=projects.html class="navigation">Next: projects </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
   
 </body>
 </html>
