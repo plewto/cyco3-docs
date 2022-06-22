@@ -14,8 +14,9 @@
   
 <body lang="en-US">
   <a id="top"></a>
-  <a href=index.html class="link">Home</a> &nbsp;<a href=raw-part.html class="navigation">Previous: raw-part </a> &nbsp;<a href=qball.html class="navigation">Next: qball </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <a href=index.html class="link">Home</a> &nbsp;<a href=raw-part.html class="navigation">Previous: raw-part </a> &nbsp;<a href=istrum.html class="navigation">Next: istrum </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <img class="center" src="images/strummer.png" alt="strummer"/>
   <h1 class="banner">Strummer Parts</h1>
   <p class="body">
     STRUMMER is a part where explicit events are specified in an events-list.
@@ -69,6 +70,21 @@
         :transposable - Boolean, if true part is subject to transpose and
                         invert transformations.
         :chord-model  - Sets chord-model, defaults to section value.
+        :hold         - Boolean, if true remove overlapping notes with the same 
+                        keynumber.   A typical use case is adding a 7th to a 
+                        sustaining chord. 
+    
+                        With hold off
+        
+                          (:time (1 1 1) :key c5 :chord [min]  :dur q ...) ;; play c e g 
+                          (:time (1 2 1) :key c5 :chord [min7] :dur q ...) ;; rearticulate c e g, add bf
+                        
+                       With hold on
+                         
+                          (:time (1 1 1) :key c5 :chord [min]  :dur q ...) ;; play c e g 
+                          (:time (1 2 1) :key c5 :chord [min7] :dur q ...) ;; continue holding c e g, add bf.
+                          Release all notes at the end time of the b-flat.
+    
         :remarks      - Optional remarks text.
         :events       - List of events, see below.
   </pre>
@@ -331,7 +347,7 @@
        TODO add documentation
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
-  <a href=index.html class="link">Home</a> &nbsp;<a href=raw-part.html class="navigation">Previous: raw-part </a> &nbsp;<a href=qball.html class="navigation">Next: qball </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <a href=index.html class="link">Home</a> &nbsp;<a href=raw-part.html class="navigation">Previous: raw-part </a> &nbsp;<a href=istrum.html class="navigation">Next: istrum </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
   
 </body>
 </html>

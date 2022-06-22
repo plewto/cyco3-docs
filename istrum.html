@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="robots" content="index,follow,archive">
+      <meta name="keywords" content="NIL">
+      <link rel="stylesheet" type="text/css" href="style.css"/>
+      <title>Istrum Parts</title>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'/>
+  </head>
+  
+<body lang="en-US">
+  <a id="top"></a>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=strummer.html class="navigation">Previous: strummer </a> &nbsp;<a href=qball.html class="navigation">Next: qball </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <img class="center" src="images/istrum.png" alt="istrum"/>
+  <h1 class="banner">Istrum</h1>
+  <p class="body">
+    <b>ISTRUM</b> is a preprocessor for <a href='strummer.html'>STRUMMER</a> which 
+    provides an alternate event syntax.  Strummer
+    relies heavily on keyword 'tags' for event parameters.  Istrum (the I is
+    for <i>implicit</i>) uses the parameter values directly to determine the
+    parameter type.   As a concrete example, strummer requires the sequence
+    <b>':chord&nbsp;[min]'</b> to specify a minor chord.  Whereas istrum knows [min] is a
+    chord and has no need for the :chord keyword.
+  </p>
+  
+  <!-- (MAKE-ISTRUM name instrument &key ...) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(MAKE-ISTRUM name instrument &key ...)</b><br>
+  <p class="summery">Creates an instance of STRUMMER using implicit event parameters, as
+    described below.</p>
+  
+  <!-- (ISTRUM name instrument &key ...) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(ISTRUM name instrument &key ...)</b><br>
+  <p class="summery">ISTRUM and MAKE-ISTRUM are identical except the former binds the new part
+   to the symbol name.  Quote the name argument to MAKE-ISTRUM, leave it
+   unquoted for ISTRUM.</p>
+  <p class="body">
+    ISTRUM and MAKE-ISTRUM take the same set of keywords as
+    STRUMMER.  See the STRUMMER page for details.
+  </p>
+  <pre class="description">
+    
+    The ISTRUM event-list is a nested list of event specifications.  With
+    exception of the first two elements of an individual event, the order of
+    parameters is not important.  Each event has a time specification as the
+    first element and a keynumber as the second.
+    
+         (time key ...)
+    
+    <b>Time</b> is always the first element of an event and must be in a format expected by the <a href='cue-functions.html'>cue function.</a>  
+         The default is a list of form (BAR BEAT SUBBEAT).
+         There are a few special cases.
+    
+         <b>=</b>  - indicates to reuse the previous time.
+         <b>+</b>  - increment time by the same amount as the previous two times.
+    
+         ((1 1 1) ...)        ;; event at bar 1 beat 1
+         ((1 2 1) ...)        ;; next event at beat 2
+         (+       ...)        ;; third event at beat 3, the difference of the previous two.
+         (=       ...)        ;; also at beat 3. 
+    
+    <b>Key number</b> is always the 2nd event element.  Ultimately it is up to the instrument's 
+        <a href='keynumber-maps.html'>keynumber-map</a> to interpret the keynumber.   Special cases:
+    
+        <b>=</b>   - reuse the previous key.
+        <b>r</b>   - the rest symbol r may be used to suppress output for the event.
+        
+        Numbers of form <b>n+</b> and <b>n-</b> transpose the previous key by &plusmn;n steps.
+        Transpose may only be used if the predicate KEYNUMBER-P would return true for the previous 
+        key.
+    
+        Otherwise the keynumber may be anything the instrument's keynumber-map recognizes.
+    
+    <b>Chords</b> are recognized as either as a valid name in the <a href='chords.html'>chord model</a> or as a list of keynumber offsets.
+    
+        [min]    - a minor chord by name.
+        (0 3 7)  - a minor chord by template.
+    
+        There is a complication.  Some chord-models interpret a chord template not as a list of offsets, but 
+        as a list of absolute keynumbers.   The default chord-model uses a template list as keynumber offsets. 
+    
+        (0 3 7) for keynumber 60 produces the minor chord at key 60,  c5 e5 g5
+    
+        The guitar-chord plugin treats a template list as absolute keynumber.  (0 3 7) is still a minor chord, 
+        but it will be in octave 0, c0 e0 g0. 
+     
+    <b>Chord Inversions</b> are specified by symbols of form <b>:INV-N  :INV+N  and  :INV-OFF</b> where n is a small integer.
+        
+        :INV+1   - first inversion
+        :INV-2   - second downward inversion 
+        :INV-OFF - turn off inversions. 
+    
+    <b>Added Chord Octave</b>  The symbols <b>:OCT-  :OCT+  and  :OCT-OFF</b> describe if an extra octave is added to a chord.
+    
+        For :OCT+ the lowest note is repeated an octave higher.
+            :OCT- the highest note is repeated an octave lower.
+            :OCT-OFF turns off octave notes.
+    
+        The extra notes are added after any chord inversion.
+    
+        (0 3 7)               ;; original chord   produces   (0 3 7)
+        (0 3 7) :inv+1        ;; first inversion  produces   (3 7 12)
+        (0 3 7) :inv+1 :oct+  ;; added octave     produces   (3 7 12 15) 
+    
+    
+    <b>Strum delay</b>  a floating point number sets the delay between successive chord notes.
+         
+         (time key (0 3 7) 0.01 ...)  produces a chord at given time with a delay 0f 0.01 seconds
+         between each note    
+                                  key+0 at time 
+                                  key+3 at time + 0.01
+                                  key+7 at time + 0.02
+    
+    
+    <b>Strum direction</b> the symbols <b>:DOWN  :UP  :RAND  and  :RAND-UP</b> determine the order chord notes are played.
+         
+         :DOWN    - notes are played in order.
+         :UP      - note are played in reverse order.
+         :RAND    - notes are played in random order.
+         :RAND-UP - either up or down order is selected randomly.
+         :UP-DOWN - alternate up and down
+         :down-up - alternate down and up
+    
+    <b>Strum End Time</b>   The symbols <b>:ETOG  and  :ETOG-OFF</b> indicate if strummed notes should all 
+        end at the same time, or be staggered in the order they were played.
+    
+        :ETOG      - notes end together.
+        :ETOG-OFF  - note off times are staggered.
+    
+    <b>Dynamics</b>  Any <a href='dynamics.html'>dynamic</a> symbol sets note amplitude.
+    
+    <b>Duration</b>  Any <a href='metrics.html'>metric-expression</a> sets note duration.
+    
+    <b>Program changes</b> are specified by <b>:PROG-nnn</b>.  Ultimately it is up to the instruments <a href='program-maps.html'>program-map</a> 
+        to process the program number.
+    
+    
+    
+    Comparison between equivalent STRUMMER and ISTRUM parts. These examples use the Jaguar instrument
+    from Quantum Leaps 'Ministry of Rock' 
+    
+    ;; JAGUAR-RHYTHM Program Map:
+    ;;   [LONG        ] -> 0   (LONG Strum long RR, position 1)
+    ;;   [LONG2       ] -> 1   (LONG2 Strum long RR, position 2)
+    ;;   [SHORT       ] -> 2   (SHORT Strum short)
+    
+    (strummer a1-jag jaguar-rhythm
+    	  :chord-model *guitar-chord-model*
+    	  :bars 4
+    	  :events '((:strum 0.01 :amp ff)
+    		    (:time (1 1 1) :key e4  :chord [min]  :dur e  :program short  :direction (up down))
+    		    (:time (1 1 3) :key fs4               :dur q  :program long)
+    		    (:time (1 2 3) :key fs3 :chord [min7]      )
+    		    (:time (1 3 3) :key fs4 :chord [min]       )
+    		    (:time (1 4 3) :key fs4                    )
+    		    (:time (2 1 1) :key g5  :chord [maj7] :dur q. :program long :direction down)
+    		    (:time (2 2 3) :key fs4 :chord [min] )
+    		    (:time (2 4 1) :key e4                :dur q)
+    		    (:time (3 1 1) :key e4                :dur e :program short :direction (up down))
+    		    (:time (3 1 3) :key fs4               :dur q :program long)
+    		    (:time (3 2 3) :key g5  :chord [maj7]      )
+    		    (:time (3 3 3) :key a5  :chord [min]       )
+    		    (:time (3 4 3) :key b4  :chord [dim7]      )
+    		    (:time (4 1 1) :key cs6 :chord [min]  :dur q. )
+    		    (:time (4 2 3) :key c6  :chord [maj]          )
+    		    (:time (4 4 1) :key b5  :chord [min]  :dur q  )))
+    		   
+    
+    ;; The equivalent istrum is more concise but not as readable.
+    ;;
+    
+    (istrum a1-jag jaguar-rhythm
+    	  :chord-model *guitar-chord-model*
+    	  :bars 4
+    	  :events '(((1 1 1) e4  e ff [min]  :up-down :program-short 0.01)
+    		    ((1 1 3) fs4 q                    :program-long)
+    		    ((1 2 3) 12-      [min7] )
+    		    (+       12+      [min]  )
+    		    (+       =               )
+    		    ((2 1 1) g5  q.   [maj7] :down    :program-long)
+    		    ((2 2 3) fs4      [min]  )
+    		    ((2 4 1) e4  q           )
+    		    ((3 1 1) =   e           :up-down :program-short)
+    		    ((3 1 3) fs4 q                    :program-long)
+    		    ((3 2 3) g5       [maj7] )
+    		    (+       a5       [min]  )
+    		    (+       b4       [dim7] )
+    		    ((4 1 1) cs6 q.   [min]  )
+    		    ((4 2 3) c6       [maj]  )
+    		    ((4 4 1) b5  q    [min]  )))
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=strummer.html class="navigation">Previous: strummer </a> &nbsp;<a href=qball.html class="navigation">Next: qball </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  
+</body>
+</html>
