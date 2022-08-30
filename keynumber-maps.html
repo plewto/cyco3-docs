@@ -4,7 +4,6 @@
   <head>
       <meta charset="UTF-8">
       <meta name="robots" content="index,follow,archive">
-      <meta name="keywords" content="NIL">
       <link rel="stylesheet" type="text/css" href="style.css"/>
       <title>Keynumber Maps</title>
       <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
@@ -21,28 +20,32 @@
   <ul class='quick-jump'>
     <li>Quick Jump:</li>
       <li><a href='#basic-keynumber-map'>basic-keynumber-map</a></li>
+      <li><a href='#circular-list-keynumber-map'>circular-list-keynumber-map</a></li>
       <li><a href='#circular-keynumber-map'>circular-keynumber-map</a></li>
+      <li><a href='#finite-list-keynumber-map'>finite-list-keynumber-map</a></li>
+      <li><a href='#wrapping-keynumber-map'>wrapping-keynumber-map</a></li>
       <li><a href='#symbolic-keynumber-map'>symbolic-keynumber-map</a></li>
+      <li><a href='#pattern-keynumber-map'>pattern-keynumber-map</a></li>
       <li><a href='#round-robin-keymap'>round-robin-keymap</a></li>
       <li><a href='#metronome'>metronome-keynumber-map</a></li>
   </ul>
   <p class="body">
-    A <i>keynumber-map</i> is a function which maps a set of values to MIDI key numbers.
+    A <em>KEYNUMBER-MAP</em> is a function which translates a set of values to MIDI key-numbers.
   </p>
   <pre class="code">
-    (lambda q) &rarr; MIDI key number
+    (lambda q) &rarr; MIDI key-number
   </pre>
   <p class="body">
-    The result should be an integer between -1 and 127 inclusive with negative
-    result indicating a rest.  A few special case argument values are
-    defined.
+    All maps should take the following arguments
   </p>
   <ul>
-    <li>:DOC the function should display documentation and return -1.</li>
-    <li>Unrecognized arguments should not be treated as an error, instead the function should return -1.</li>
+    <li>'x     - Returns the default keynumber</li>
+    <li>:doc   - Prints documentation</li>
+    <li>:gamut - Returns list of keynumbers the map may return.</li>
+    <li>:reset - Resets internal structures within the keymap.</li>
   </ul>
   <p class="body">
-    The following factory functions generate keynumber-maps of various forms.
+    Any unrecognized arguments should return a rest (-1).
   </p>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="basic-keynumber-map"></a>
@@ -59,23 +62,97 @@
     	         The transposition is applied after the range test, default 0.
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a id="circular-list-keynumber-map"></a>
+  
+  <!-- (CIRCULAR-LIST-KEYNUMBER-MAP keys) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(CIRCULAR-LIST-KEYNUMBER-MAP keys)</b><br>
+  <p class="summery">Maps index over list of keynumbers in a circular manner.</p>
+  <pre class="description">
+    	
+      (param foo (circular-list-keynumber-map '(10 33 46)))
+    	
+      (foo 0) &rarr; 10
+      (foo 1) &rarr; 33
+      (foo 2) &rarr; 46
+      (foo 3) &rarr; 10
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="circular-keynumber-map"></a>
   
   <!-- (CIRCULAR-KEYNUMBER-MAP start end) -->
   <!--  -->
   <!--  -->
   <b class="definition">(CIRCULAR-KEYNUMBER-MAP start end)</b><br>
-  <p class="summery">Creates map where keynumbers between start and end are returned in a circular manner.</p>
+  <p class="summery">Maps index  over range of consecutive keynumbers in a circular manner.</p>
   <pre class="description">
-    Circular maps are useful for certain percussion instruments such as shakers.
-    	
-    A circular map foo where start=10 and end=12 has the following response. 
-    	
-      (foo 0) &rarr; 10
-      (foo 1) &rarr; 11
-      (foo 2) &rarr; 12
-      (foo 3) &rarr; 10
-      (foo 'whatever) &rarr; -1
+    
+       (param foo (circular-keynumber-map 60 63))
+    
+       (foo 0) &rarr; 60
+       (foo 1) &rarr; 61
+       (foo 2) &rarr; 62
+       (foo 3) &rarr; 63
+       (foo 4) &rarr; 60
+    
+    CIRCULAR-KEYNUMBER-MAP always maps over a consecutive range of keynumbers. 
+    By contrast CIRCULAR-LIST-KEYNUMBER-MAP may take an arbitrary sequence of keynumbers. 
+      
+    An inverted keymap is produced when start &gt; end.
+    
+       (param foo (circular-keynumber-map 127 0))
+    
+       (foo 70) &rarr; 57
+       (foo 71) &rarr; 56
+       (foo 72) &rarr; 55
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a id="finite-list-keynumber-map"></a>
+  
+  <!-- (FINITE-LIST-KEYNUMBER-MAP keylist) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(FINITE-LIST-KEYNUMBER-MAP keylist)</b><br>
+  <p class="summery">Maps index over list of values, out of bounds indexes return +REST+.</p>
+  <pre class="description">
+    
+        (param foo (finite-list-keynumber-map '(10 20 30)))
+    
+       (foo 0) &rarr; 10
+       (foo 1) &rarr; 20
+       (foo 2) &rarr; 30
+       (foo 3) &rarr; -1
+       (foo 4) &rarr; -1
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a id="wrapping-keynumber-map"></a>
+  
+  <!-- (WRAPPING-KEYNUMBER-MAP start end) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(WRAPPING-KEYNUMBER-MAP start end)</b><br>
+  <p class="summery">Maps index to range (start&nbsp;end), out of bounds indexes map to the closest octave equivalent.</p>
+  <pre class="description">
+    
+    
+       The start..end range should always be an octave multiple minus 1
+       I.E. 11, 23, 35 ...
+    
+       (param foo (wrapping-keynumber-map 60 71))
+    
+    
+       (foo 48) &rarr; 60
+       (foo 49) &rarr; 61
+       (foo 50) &rarr; 62
+    
+       (foo 60) &rarr; 60
+       (foo 61) &rarr; 61
+       (foo 62) &rarr; 62
+       ...
+       (foo 71) &rarr; 71
+       (foo 72) &rarr; 60
+       (foo 73) &rarr; 61
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="symbolic-keynumber-map"></a>
@@ -106,12 +183,55 @@
           ........
          (foo undefined-symbol) &rarr; -1
     	  
-    For numeric arguments the map behaves like a circular-keynumber-map
+    For numeric arguments the map behaves like a circular-list-keynumber-map
     	 
          (foo 0) &rarr; 36
          (foo 1) &rarr; 38
          (foo 3) &rarr; 37
          (foo 4) &rarr; 36
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a id="pattern-keynumber-map"></a>
+  
+  <!-- (PATTERN-KEYNUMBER-MAP assignments) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(PATTERN-KEYNUMBER-MAP assignments)</b><br>
+  <p class="summery">Creates keynumber-map similar to SYMBOLIC-KEYNUMBER-MAP but allows general 
+  <a href='patterns.html'>patterns</a> for key-numbers.</p>
+  <pre class="description">
+    Assignments is an association list of form 
+    
+        ((symbol-1 pattern-1 [optional-remarks])
+         (symbol-1 pattern-2 [optional-remarks])
+          .....................................
+         (symbol-n pattern-n [optional-remarks]))
+    
+    where pattern may be one of:
+    
+          1) A literal keynumber.
+          2) A list of keynumbers is converted to a dice pattern
+          3) Any pattern of keynumbers, used as is.
+    
+    (param foo (pattern-keynumber-map 
+                 (list '(a 40)                            ;; a always maps to keynumber 40
+                       '(b (41 42 43))                    ;; b returns 41 or 42 at random
+                        (list 'c (cycle :of '(50 51)))))) ;; c returns 50 and 51 in a cycle
+    
+         (foo 'a) &rarr; 48
+         (foo 'b) &rarr; 43
+         (foo 'b) &rarr; 43
+         (foo 'b) &rarr; 42
+         (foo 'c) &rarr; 50
+         (foo 'c) &rarr; 51
+         (foo 'c) &rarr; 50
+    
+    For numeric arguments the map behaves like a circular-list-keynumber-map
+    	 
+         (foo 0) &rarr; 40
+         (foo 1) &rarr; 42
+         (foo 3) &rarr; 50
+         (foo 4) &rarr; 40
   </pre>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a id="round-robin-keymap"></a>
@@ -120,7 +240,8 @@
   <!--  -->
   <!--  -->
   <b class="definition">(ROUND-ROBIN-KEYMAP assignments)</b><br>
-  <p class="summery">Creates a keynumber-map similar to a SYMBOLIC-KEYNUMBER-MAP but allows round-robin notes.</p>
+  <p class="summery">Special case PATTERN-KEYNUMBER-MAP to create 
+  <a href='https://musicalsanctuary.com/round-robins-what-are-they/'>round robbin</a> key assignments.</p>
   <pre class="description">
     Assignments is an association list of form
     
@@ -129,7 +250,7 @@
          .......................................
         (symbol-n (keynumbers ...) [optional remarks]))
     
-    If the keynumbers sub-list contains more then one value, then they are sued
+    If the keynumbers sub-list contains more then one value, then they are used
     in sequence.  A typical snare keymap might look like this:
     
         ((hit  . (30 31 32))

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="robots" content="index,follow,archive">
+      <link rel="stylesheet" type="text/css" href="style.css"/>
+      <title>glossary</title>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'/>
+      <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'/>
+  </head>
+  
+<body lang="en-US">
+  <a id="top"></a>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a id="cuelist"></a>
+  <p class="body">
+    A <b>CUELIST</b> is a list of event time specifications.   The
+    exact format is not specified but the <a href='cue-functions.html#bar'>BAR</a> 
+    format of (bar&nbsp;beat&nbsp;subbeat) is a de&nbsp;facto standard.   
+    See <a href='glossary.html#cuestring'>Cuestrings</a>.
+  </p>
+  <a id="cuestring"></a>
+  <p class="body">
+    A <b>CUESTRING</b> is an alternate means of specifying a 
+    <a href='glossary.html#cuestring'>cuelist</a> using a string.  The exact
+    format is not specified but a binary form used by 
+    <a href='bincue.html'>BINCUE</a> is a de&nbsp;facto standard.
+  </p>
+  <a id="midi-event"></a>
+  <p class="body">
+    A <b>MIDI EVENT</b> is a cons of form
+    (time&nbsp;.&nbsp;message) where time is a real number in seconds and
+    message is a <a href='midi-events.html'>MIDI message</a>
+  </p>
+  <a id="tsig"></a>
+  <p class="body">
+    A <b>TIME SIGNATURE DESIGNATOR</b> may be one of the following
+  </p>
+  <ul>
+    <li>An instance of <a href='time-signature.html'>TIME-SIGNATURE</a></li>
+    <li>A list of form (bar-count beat-count)</li>
+    <li>NIL - use default, will be one of
+  <ol>
+      <li>The current-section of *project*.</li>
+      <li>If there is no current-section, use *project*.</li>
+      <li>If *project* is nil, use a fallback signature, 2-bars in 4/4 time.</li>
+  </ol></li>
+  </ul>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  <a href=index.html class="link">Home</a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
+  
+</body>
+</html>

@@ -4,7 +4,6 @@
   <head>
       <meta charset="UTF-8">
       <meta name="robots" content="index,follow,archive">
-      <meta name="keywords" content="NIL">
       <link rel="stylesheet" type="text/css" href="style.css"/>
       <title>Generic Functions</title>
       <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
@@ -17,6 +16,520 @@
   <a href=index.html class="link">Home</a> &nbsp;<a href=specialized-parts.html class="navigation">Previous: specialized-parts </a> &nbsp;<a href=math-utilities.html class="navigation">Next: math-utilities </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <h1 class="banner">Generic Functions</h1>
+  <p class="body">
+    
+    <a href='#a'>A</a>
+    <a href='#b'>B</a>
+    <a href='#c'>C</a>
+    <a href='#d'>D</a>
+    <a href='#f'>F</a>
+    <a href='#g'>G</a>
+    <a href='#h'>H</a>
+    <a href='#i'>I</a>
+    <a href='#k'>K</a>
+    <a href='#l'>L</a>
+    <a href='#m'>M</a>
+    <a href='#n'>N</a>
+    <a href='#o'>O</a>
+    <a href='#p'>P</a>
+    <a href='#q'>Q</a>
+    <a href='#r'>R</a>
+    <a href='#s'>S</a>
+    <a href='#t'>T</a>
+    <a href='#u'>U</a>
+    <a href='#v'>V</a>
+    <a href='#w'>W</a>
+    <a href='#x'>X</a>
+  </p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (-&gt;cycle object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(-&gt;cycle object)</b><br>
+  <p class="summery">Coerce object to Cycle pattern.
+  <ul>
+      <li>If object is an instance of Cycle, return it.</li>
+      <li>If object is some non-cycle Pattern, return a new Cycle with the elements of object.</li>
+      <li>If object is a list or vector, return new Cycle :of object.</li>
+      <li>For all other types, coerce object to a list and return new Cycle.</li>
+  </ul></p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (-&gt;list object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(-&gt;list object)</b><br>
+  <p class="summery">Coerce object to a list.
+  <ul>
+      <li>If object is a list, return it.</li>
+      <li>If object is some other sequence type, return new list of object's elements.</li>
+      <li>For all other types, create new list with object as its only element.</li>
+  </ul></p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (-&gt;midi contents &key filename offset repeat pad no-stripe) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(-&gt;midi contents &key filename offset repeat pad no-stripe)</b><br>
+  <p class="summery">Creates new MIDI file from contents.</p>
+  <pre class="description">
+    
+        :filename - Optional String, if not specified the filename is derived from
+                    the name of contents and the current project.
+        :offset   - float, initial offset time in seconds, default 0.
+        :repeat   - int, number of times to repeat contents, default 1.  If repeat is too 
+                    large stack depth may be exhausted.           
+        :pad      - float, number of seconds to add to end of file, default 2.
+        :no-stripe - DEPRECIATED, has no effect.
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (-&gt;pattern object &key pattern-type) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(-&gt;pattern object &key pattern-type)</b><br>
+  <p class="summery">Coerce object to Pattern of type pattern-type.
+  <ul>
+      <li>If object is a pattern-type, return it.</li>
+      <li>If object is a non pattern-type Pattern, return new instance of pattern-type with elements taken</li>
+      <li>from object.</li>
+      <li>For all other types return (pattern-type :of object)</li>
+      <li>The default pattern-type is Cycle.</li>
+  </ul></p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (-&gt;string object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(-&gt;string object)</b><br>
+  <p class="summery">Returns string representation of object.  -&gt;string is defined for following types
+  <ul>
+      <LI> TIME-SIGNATURE</LI>
+      <LI> SMF</LI>
+      <LI> MIDI-KEY-SIGNATURE</LI>
+      <LI> MIDI-TIME-SIGNATURE</LI>
+      <LI> MIDI-TEMPO-MESSAGE</LI>
+      <LI> MIDI-META-TEXT</LI>
+      <LI> MIDI-META-MESSAGE</LI>
+      <LI> MIDI-SYSTEM-EXCLUSIVE</LI>
+      <LI> MIDI-SYSTEM-COMMON-MESSAGE</LI>
+      <LI> MIDI-CHANNEL-MESSAGE</LI>
+      <LI> MIDI-MESSAGE</LI>
+      <LI> CYCO-NODE</LI>
+      <LI> PATTERN</LI>
+      <LI> LIST</LI>
+      <LI> STRING  returns string</LI>
+      <LI> T  catchall</LI>
+  </ul></p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (-&gt;symbol arg &optional package) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(-&gt;symbol arg &optional package)</b><br>
+  <p class="summery">Interns new symbol using <a href='#name'>name</a> of object</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (-&gt;vector object -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(-&gt;vector object</b><br>
+  <p class="summery">Coerce object to vector.
+  <ul>
+      <li>If object is a vector, return it.</li>
+      <li>If object is a non-vector sequence, return new vector using elements of object.</li>
+      <li>For all other cases return new vector with object as its only element.</li>
+  </ul>
+  </p>
+  <a id="a"></a>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (add-group section group) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(add-group section group)</b><br>
+  <p class="summery">Adds <a href='sections.html#group'>group</a> to section</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (articulation-map object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(articulation-map object)</b><br>
+  <p class="summery">Returns object's <a href='articulation-maps.html'>articulation map</a></p>
+  <a id="b"></a>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (bar-duration time-signature) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(bar-duration time-signature)</b><br>
+  <p class="summery">Returns duration in seconds of a single bar.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (bars time-signature) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(bars time-signature)</b><br>
+  <p class="summery">Returns number of bars per phrase</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (beat-duration time-signature) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(beat-duration time-signature)</b><br>
+  <p class="summery">Returns duration in seconds of a single beat.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (beats time-signature) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(beats time-signature)</b><br>
+  <p class="summery">Returns number of beats per bar.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (bender-p item) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(bender-p item)</b><br>
+  <p class="summery">Predicate, returns t if item is an instance of <a href='controllers.html#bender'>BENDER</a>.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (bincue-translate bc cue) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(bincue-translate bc cue)</b><br>
+  <p class="summery">Translates <a href='bincue.html'>bincue</a> binary cuelist.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (butfinal seq) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(butfinal seq)</b><br>
+  <p class="summery">Returns copy of seq with final element removed.   Defines for list, vectors and strings</p>
+  <a id="c"></a>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (channel object &optional resolve) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(channel object &optional resolve)</b><br>
+  <p class="summery">Returns <a href='channel-names.html'>MIDI channel</a> of object. 
+  <br>Defined for instrument, midi-channel-message and int.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (channel-index object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(channel-index object)</b><br>
+  <p class="summery">Returns MIDI channel index of object.<br>
+  The channel-index is the actual transmitted value in the range 0..15 as opposed to the 
+  'true' channel 1..16<br>
+  Defined for instrument, midi-channel-message and integer.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (child-of-p parent child) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(child-of-p parent child)</b><br>
+  <p class="summery">Predicate returns t if child <a href='nodes.html'>node</a> is a direct descendant of parent.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (chord-template chord-model chord-type keynumber) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(chord-template chord-model chord-type keynumber)</b><br>
+  <p class="summery">Returns chord keylist from chord-model</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (chord-types chord-model) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(chord-types chord-model)</b><br>
+  <p class="summery">Returns chord types defined by model</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (clone mother &key &allow-other-keys) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(clone mother &key &allow-other-keys)</b><br>
+  <p class="summery">Returns a deep copy of mother.</p>
+  <pre class="description">
+    Clone is defined for a wide array of types.  Where it is not defined,
+    it returns the mother argument.  Depending on the type different sets of
+    keyword arguments may be available.
+    
+    :new-name   - For named objects, format string applied to translate mother's name to daughter.
+    :new-parent - For node objects, assign a new parent to the clone. If not
+                  specified the parent of mother is used.
+    
+    For SECTION objects
+    
+    :exclude       - List of part names to be excluded.
+    :rename-parts  - If non-nil all parts in cloned object will be renamed.
+    :bind          - If true all cloned parts will be bound to symbols eq to their name.
+    
+    Cloned sections become the project's current-section.
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (cnth n seq) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(cnth n seq)</b><br>
+  <p class="summery">Returns nth element of sequence using circular indexing, defined for
+  list, vectors and strings.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (connect parent child) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(connect parent child)</b><br>
+  <p class="summery">Connects child <a href='nodes.html'>node</a> to parent.  The connection
+  between child and it's previous parent is severed.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (controllers-p object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(controllers-p object)</b><br>
+  <p class="summery">Predicate, returns true if object is an instance of <a
+  href='controllers.html'>controllers</a>.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (copy-part-properties source destination) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(copy-part-properties source destination)</b><br>
+  <p class="summery"></p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (cuelist object &key form timesig use-subbeats) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(cuelist object &key form timesig use-subbeats)</b><br>
+  <p class="summery">Returns object's cuelist</a> or changes format of a cuelist.</p>
+  <pre class="description">
+    
+    object   - <a href='parts.html'>PART</a>, <a href='glossary.html#cuelist'>cuelist</a> or <a href='glossary.html#cuestring'>cuestring</a>
+    
+    :form    - Result format, may be either :binary for a cuestring or :list (default) for a cuelist.
+    :timesig - <a href='glossary.html#tsig'>Time signature designator</a>
+    :use-subbeats - Sets reference time unit either to time-signature's subbeats or tsubbeats. Default t
+  </pre>
+  <a id="d"></a>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (data object index) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(data object index)</b><br>
+  <p class="summery">Returns data byte from MIDI message</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (data-count object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(data-count object)</b><br>
+  <p class="summery">Returns number of data values for MIDI message</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (define-chord chord-model name template &optional description) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(define-chord chord-model name template &optional description)</b><br>
+  <p class="summery">Adds chord template to chord-model.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (defines-chord-p chord-model chord-name) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(defines-chord-p chord-model chord-name)</b><br>
+  <p class="summery">Predicate returns t if the models has the named chord.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (disconnect child) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(disconnect child)</b><br>
+  <p class="summery">Sever the connection between child node and it's parent. It is not an error if child is a root node.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (duck cuelist object &key invert timesig use-subbeats) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(duck cuelist object &key invert timesig use-subbeats)</b><br>
+  <p class="summery">Creates a new <a href='glossary.html#cuelist'>cuelist</a> by 
+  <a href='https://en.wikipedia.org/wiki/Ducking'>ducking</a> objects events.</p>
+  <pre class="description">
+    
+    cuelist - The source cuelist. 
+    object  - Object to be ducked.
+    :invert   - Boolean, if true return the AND of the two cuelist. Default nil
+    :timesig  - <a href='glossary.html#tsig'>Time signature designator</a>.
+    :use-subbeats - Default t.
+  </pre>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (dump-chords chord-model) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(dump-chords chord-model)</b><br>
+  <p class="summery">Display list chords defined by the model.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (dump-events object &key range filter render) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(dump-events object &key range filter render)</b><br>
+  <p class="summery">Display list of <a href='midi-events.html'>MIDI events</a> generated by object</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (dump-smf-track-chunk track pad) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(dump-smf-track-chunk track pad)</b><br>
+  <p class="summery">Diagnostic display of MIDI file track contents</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (duplicate-channel-message message &key channel data1 data2) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(duplicate-channel-message message &key channel data1 data2)</b><br>
+  <p class="summery">Returns a new MIDI channel message with possible modification of channel or either data byte.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (duration time-signature) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(duration time-signature)</b><br>
+  <p class="summery">Returns time-signature duration in seconds.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (dynamic dynamic-value) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(dynamic dynamic-value)</b><br>
+  <p class="summery">Converts <a href='dynamics.html'>dynamic</a> value to normalized float. May be applied to list of dynamic values.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (dynamic-&gt;velocity dynamic-value) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(dynamic-&gt;velocity dynamic-value)</b><br>
+  <p class="summery">Converts <a href='dynamics.html'>dynamic</a> to MIDI velocity.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (dynamic-map instrument) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(dynamic-map instrument)</b><br>
+  <p class="summery">Returns object's <a href='dynamic-maps.html'>dynamic map</a></p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (dynamic-name dynamic-value) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(dynamic-name dynamic-value)</b><br>
+  <p class="summery">Returns closest symbolic <a href='dynamics.html'>dynamic</a> value.</p>
+  <a id="f"></a>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (final sequence) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(final sequence)</b><br>
+  <p class="summery">Returns final element from sequence, defined for list, vectors and strings.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (find-child parent child) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(find-child parent child)</b><br>
+  <p class="summery">Find child of parent <a href='nodes.html'>node</a>.</p>
+  <pre class="description">
+    Defined for child being an instance of CYCO-NODE or a symbol.
+    Returns child if child is a node AND it is a child of parent.
+    
+    If child is a symbol, returns the node, if it exists, with a matching name.
+  </pre>
+  <a id="g"></a>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (generator-p item) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(generator-p item)</b><br>
+  <p class="summery">Predicate, returns true if item is an instance of <a href='generators.html'>generator</a></p>
+  <a id="h"></a>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (has-group-p section group-name) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(has-group-p section group-name)</b><br>
+  <p class="summery">Predicate, returns true if section has named group</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (hash-property node key) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(hash-property node key)</b><br>
+  <p class="summery">Predicate, returns true if <a href='nodes.html'>node</a> has proproperty key</p>
+  <a id="i"></a>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (init-time-signature time-signature) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(init-time-signature time-signature)</b><br>
+  <p class="summery">Initialize time-signature.  This method should be called whenever a time-signature is
+  created or its parameters updated.</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (invert keynumber pivot-key) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(invert keynumber pivot-key)</b><br>
+  <p class="summery">Returns keynumber inversion.  Invert is defined for integer, symbol, list, pattern and sevral part types.</p>
+  <a id="k"></a>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (keyname keynumber) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(keyname keynumber)</b><br>
+  <p class="summery">Returns symbolic name for keynumber, defined for integer, symbol, and list </p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (keynumber object) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(keynumber object)</b><br>
+  <p class="summery">Returns MIDI keynumber of object, defined for integer, symbol, list and MIDI-KEY-MESSAGE</p>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (keynumber-map instrument) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(keynumber-map instrument)</b><br>
+  <p class="summery">Returns <a href='instruments.html'>instrument's</a> <a href='keynumber-maps.html'>keynumber-map</a></p>
+  <a id="l"></a>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (local-properties node) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(local-properties node)</b><br>
+  <p class="summery">Returns list of node properties </p>
+  <a id="m"></a>
+  <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
+  
+  <!-- (<a href='mask-cuelist.html'>mask-cuelist</a> cuelist mask &key op shift rotate timesig use-subbeats) -->
+  <!--  -->
+  <!--  -->
+  <b class="definition">(<a href='mask-cuelist.html'>mask-cuelist</a> cuelist mask &key op shift rotate timesig use-subbeats)</b><br>
+  <p class="summery"></p>
   <hr style='height:4px;border-width:0;color:green;background-color:gray'/>
   <a href=index.html class="link">Home</a> &nbsp;<a href=specialized-parts.html class="navigation">Previous: specialized-parts </a> &nbsp;<a href=math-utilities.html class="navigation">Next: math-utilities </a> &nbsp;<a href=#top class="navigation">Top </a> &nbsp;<a href=contents.html class="navigation">Contents </a> &nbsp;
   
